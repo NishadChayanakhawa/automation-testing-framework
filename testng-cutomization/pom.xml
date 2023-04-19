@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.github.nishadchayanakhawa</groupId>
+		<artifactId>automation-testing-framework</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<artifactId>testng-cutomization</artifactId>
+	<name>TestNG Customization</name>
+	<description>TestNG Customization</description>
+
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.testng/testng -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+		</dependency>
+		<!-- Testing -->
+		<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+		</dependency>
+		<!-- Internal -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>file-handling</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>logging</artifactId>
+		</dependency>
+	</dependencies>
+</project>

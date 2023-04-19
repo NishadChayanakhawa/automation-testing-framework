@@ -1,0 +1,20 @@
+{
+	"invalidKey" : [
+		{
+			"Parameter1" : "Value1",
+			"Parameter2" : 1,
+			"Parameter3" : false,
+			"Parameter4" : 4.400000,
+			"Parameter5" : 5.555000	
+		},
+		{
+			"Parameter1" : "Value2",
+			"Parameter2" : 2,
+			"Parameter3" : true
+		},
+		{
+			"Parameter1" : "Value3",
+			"Parameter2" : 3	
+		}
+	]
+}

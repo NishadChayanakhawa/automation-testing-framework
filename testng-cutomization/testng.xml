@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestNG Customizations Unit Tests">
+	<test name="Data Provider Unit Tests">
+		<classes>
+			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.ExcelTestDataProviderTests" />
+			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.JsonTestDataProviderTests" />
+			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.NoExcelFileTest" />
+			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.XlsxTestDataProviderTests" />
+		</classes>
+	</test>
+</suite>
