@@ -12,8 +12,8 @@
 	<description>File Handling</description>
 	
 	<properties>
-		<jacoco-instruction-coveredratio.minimum>0.92</jacoco-instruction-coveredratio.minimum>
-		<jacoco-branch-coveredratio.minimum>0.92</jacoco-branch-coveredratio.minimum>
+		<jacoco-instruction-coveredratio.minimum>0.99</jacoco-instruction-coveredratio.minimum>
+		<jacoco-branch-coveredratio.minimum>0.96</jacoco-branch-coveredratio.minimum>
 	</properties>
 
 	<dependencies>
