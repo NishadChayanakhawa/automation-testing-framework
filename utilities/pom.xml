@@ -10,5 +10,6 @@
   <name>Utilities</name>
   <modules>
   	<module>logging</module>
+  	<module>file-handling</module>
   </modules>
 </project>

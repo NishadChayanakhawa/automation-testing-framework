@@ -1,0 +1,53 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>io.github.nishadchayanakhawa</groupId>
+		<artifactId>utilities</artifactId>
+		<version>0.0.1</version>
+	</parent>
+	<artifactId>file-handling</artifactId>
+	<name>File Handling</name>
+	<description>File Handling</description>
+	
+	<properties>
+		<jacoco-instruction-coveredratio.minimum>0.99</jacoco-instruction-coveredratio.minimum>
+		<jacoco-branch-coveredratio.minimum>0.96</jacoco-branch-coveredratio.minimum>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+		</dependency>
+		<!-- Internal dependencies -->
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>logging</artifactId>
+		</dependency>
+		<!-- Testing -->
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- Testing -->
+		<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+</project>
