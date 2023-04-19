@@ -13,11 +13,11 @@ import org.apache.logging.log4j.core.config.Configurator;
 import io.nishadc.automationtestingframework.logging.exceptions.LoggerInitializationException;
 
 /**
-* <b>Class Name</b>: LoggerFactory<br/>
+* <b>Class Name</b>: LoggerFactory<br>
 * <b>Description</b>: 
 * Provides an interface to create Log4j Logger instances. Has custom setting file pre-loaded which sets the logger to 
-* publish all levels to a file and info and up levels to console.<br/>
-* @author Nishad Chayanakhawa<nishad.chayanakhawa@gmail.com>
+* publish all levels to a file and info and up levels to console.<br>
+* @author Nishad Chayanakhawa &lt;nishad.chayanakhawa@gmail.com&gt;
 *
 */
 public class LoggerFactory {
@@ -31,8 +31,8 @@ public class LoggerFactory {
 	}
 	
 	/**
-	 * <b>Method Name</b>: setupLogger<br/>
-	 * <b>Description</b>: Sets up logger based on setting file LOG4j2_SETTING_FILE_NAME="log4j2.xml"<br/>
+	 * <b>Method Name</b>: setupLogger<br>
+	 * <b>Description</b>: Sets up logger based on setting file LOG4j2_SETTING_FILE_NAME="log4j2.xml"<br>
 	 * @since v1.0.0
 	 * @throws {@link io.nishadc.automationFramework.utilities.logging.exceptions.LoggerInitializationException LoggerInitializationException} 
 	 * in case there is error reading custom settings file.
@@ -59,10 +59,10 @@ public class LoggerFactory {
 	}
 	
 	/**
-	 * <b>Method Name</b>: create<br/>
+	 * <b>Method Name</b>: create<br>
 	 * <b>Description</b>: Sets up log4j logger and return Logger instance as well. Only info and above logs will be
-	 * printed to console. However, all levels are written to file <i>target/execution.log</i><br/>
-	 * <b>Returns</b>: {@link org.apache.logging.log4j.Logger Logger} <br/>
+	 * printed to console. However, all levels are written to file <i>target/execution.log</i><br>
+	 * <b>Returns</b>: {@link org.apache.logging.log4j.Logger Logger} <br>
 	 * @since v1.0.0
 	 * @param classObject Class object as {@link java.lang.Class Class&lt;?&gt;}
 	 * @return
