@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="[%-5level] [%d{HH:mm:ss.SSS}] [%t] - %msg%n"/>
+            <ThresholdFilter level="info"/>
+        </Console>
+        <File name="LogToFile" fileName="target/execution.log">
+			<PatternLayout pattern="[%-5level] [%d{HH:mm:ss.SSS}] [%t] - %msg%n"/>
+            <ThresholdFilter level="debug"/>
+		</File>
+    </Appenders>
+    <Loggers>
+        <Root level="debug">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
