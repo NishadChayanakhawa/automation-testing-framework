@@ -10,11 +10,25 @@
 	<artifactId>file-handling</artifactId>
 	<name>File Handling</name>
 	<description>File Handling</description>
+	
+	<properties>
+		<jacoco-instruction-coveredratio.minimum>0.92</jacoco-instruction-coveredratio.minimum>
+		<jacoco-branch-coveredratio.minimum>0.92</jacoco-branch-coveredratio.minimum>
+	</properties>
 
 	<dependencies>
 		<dependency>
 			<groupId>org.json</groupId>
 			<artifactId>json</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi-ooxml</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.poi/poi -->
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
 		</dependency>
 		<!-- Internal dependencies -->
 		<dependency>

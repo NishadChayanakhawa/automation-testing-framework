@@ -5,6 +5,7 @@
 		<classes>
 			<class name="io.nishadc.automationtestingframework.filehandling.unittests.FlatFileHandlingTests" />
 			<class name="io.nishadc.automationtestingframework.filehandling.unittests.JsonFileHandlingTests" />
+			<class name="io.nishadc.automationtestingframework.filehandling.unittests.ExcelFileHandlingTests" />
 		</classes>
 	</test>
 </suite>
