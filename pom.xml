@@ -38,6 +38,7 @@
 
 	<modules>
 		<module>utilities</module>
+		<module>testng-cutomization</module>
 	</modules>
 
 	<distributionManagement>
@@ -216,6 +217,11 @@
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>logging</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>file-handling</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
