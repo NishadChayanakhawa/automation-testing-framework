@@ -65,7 +65,7 @@ public class LoggerFactory {
 	 * <b>Returns</b>: {@link org.apache.logging.log4j.Logger Logger} <br>
 	 * @since v1.0.0
 	 * @param classObject Class object as {@link java.lang.Class Class&lt;?&gt;}
-	 * @return
+	 * @return logger as {@link org.apache.logging.log4j.Logger Logger}
 	 */
 	public static Logger create(Class<?> classObject) {
 		//setup logger

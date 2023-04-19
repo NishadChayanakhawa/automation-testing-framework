@@ -220,6 +220,13 @@
 			</dependency>
 
 			<!-- Utilities -->
+			<!-- File Handling -->
+			<!-- https://mvnrepository.com/artifact/org.json/json -->
+			<dependency>
+			    <groupId>org.json</groupId>
+			    <artifactId>json</artifactId>
+			    <version>${json.version}</version>
+			</dependency>
 			<!-- Logging -->
 			<!--
 			https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
