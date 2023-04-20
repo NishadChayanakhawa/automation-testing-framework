@@ -229,9 +229,9 @@
 			<!-- File Handling -->
 			<!-- https://mvnrepository.com/artifact/org.json/json -->
 			<dependency>
-			    <groupId>org.json</groupId>
-			    <artifactId>json</artifactId>
-			    <version>${json.version}</version>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>${json.version}</version>
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/org.apache.poi/poi-ooxml -->
 			<dependency>
@@ -269,12 +269,51 @@
 				<version>${testng.version}</version>
 			</dependency>
 
+			<!-- TestNG Customizations -->
+			<!--
+			https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<!--
+			https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-annotations</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
+			<dependency>
+				<groupId>org.freemarker</groupId>
+				<artifactId>freemarker</artifactId>
+				<version>${freemarker.version}</version>
+			</dependency>
+
+			<!-- Web UI -->
+			<!--
+			https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-java</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+
 			<!-- Testing -->
 			<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
 			<dependency>
 				<groupId>org.assertj</groupId>
 				<artifactId>assertj-core</artifactId>
 				<version>${assertj.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!--
+			https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+			<dependency>
+				<groupId>io.github.bonigarcia</groupId>
+				<artifactId>webdrivermanager</artifactId>
+				<version>${webdrivermanager.version}</version>
 				<scope>test</scope>
 			</dependency>
 		</dependencies>
@@ -294,17 +333,17 @@
 		<jacoco-instruction-coveredratio.minimum>1.0</jacoco-instruction-coveredratio.minimum>
 		<jacoco-branch-coveredratio.minimum>1.0</jacoco-branch-coveredratio.minimum>
 		<sonar.host.url>http://103.160.144.199:9000</sonar.host.url>
-
+		<sonar.exclusions>**/beans/*</sonar.exclusions>
+		
 		<!-- Dependency Versions -->
 		<log4j.version>2.20.0</log4j.version>
 		<json.version>20230227</json.version>
 		<poi.version>5.2.3</poi.version>
 		<testng.version>7.5</testng.version>
 		<assertj.version>3.24.2</assertj.version>
-
-		<!-- Not sorted -->
 		<jackson.version>2.15.0-rc2</jackson.version>
 		<selenium.version>4.8.3</selenium.version>
 		<freemarker.version>2.3.32</freemarker.version>
+		<webdrivermanager.version>5.3.2</webdrivermanager.version>
 	</properties>
 </project>
