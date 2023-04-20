@@ -225,6 +225,11 @@
 				<artifactId>file-handling</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>testng-cutomization</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<!-- Utilities -->
 			<!-- File Handling -->
