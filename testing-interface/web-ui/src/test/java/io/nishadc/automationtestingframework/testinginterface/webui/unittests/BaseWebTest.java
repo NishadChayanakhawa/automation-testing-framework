@@ -1,5 +1,7 @@
 package io.nishadc.automationtestingframework.testinginterface.webui.unittests;
 
+import java.nio.file.Paths;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
@@ -25,5 +27,10 @@ protected static ThreadLocal<WebDriver> drivers=new ThreadLocal<>();
 			driver.quit();
 		}
 		BaseWebTest.drivers.remove();
+	}
+	
+	protected static String getTestPageUrl(String fileName) {
+		String fileFullPath=String.format("src/test/resources/TestPages/%s.html", fileName);
+		return String.format("file:///%s", Paths.get(fileFullPath).toAbsolutePath());
 	}
 }

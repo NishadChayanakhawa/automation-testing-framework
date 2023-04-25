@@ -6,7 +6,7 @@
 	</listeners>
 	<test name="Application Action Unit Tests">
 		<classes>
-			<class name="io.nishadc.automationtestingframework.testinginterface.webui.unittests.WebFormSubmissionTest" />
+			<class name="io.nishadc.automationtestingframework.testinginterface.webui.unittests.ApplicationActionsTests" />
 		</classes>
 	</test>
 </suite>
