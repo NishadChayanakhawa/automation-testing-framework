@@ -11,5 +11,6 @@
   <description>Testing Interface</description>
   <modules>
   	<module>web-ui</module>
+  	<module>rest-api</module>
   </modules>
 </project>

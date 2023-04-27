@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="REST API Unit Tests">
+	<listeners>
+		<listener class-name="io.nishadc.automationtestingframework.testngcustomization.ReportGenerator"></listener>
+	</listeners>
+	<test name="REST API Test Helper Unit Tests">
+		<classes>
+			<class name="io.nishadc.automationtestingframework.testinginterface.restapi.unittests.RESTAPITestHelperTests" />
+		</classes>
+	</test>
+</suite>
