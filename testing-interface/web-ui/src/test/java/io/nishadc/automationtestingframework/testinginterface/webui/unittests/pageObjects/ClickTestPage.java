@@ -10,6 +10,9 @@ import io.nishadc.automationtestingframework.testinginterface.webui.ApplicationA
 public class ClickTestPage extends ApplicationActions {
 	private static final String VALUE_XPATH="//input[@id='value']";
 	private static final String BUTTON_XPATH="//button[@id='button']";
+	private static final String DISABLED_XPATH="//input[@id='disabled']";
+	private static final String INNER_TEXT_XPATH="//div[@id='innerTextTest']";
+	private static final String HIDDEN_XPATH="//div[@id='hiddenTest']";
 	private static final String SINGLE_DROPDOWN_XPATH="//select[@id='singleSelect']";
 	private static final String MULTI_DROPDOWN_XPATH="//select[@id='multiSelect']";
 	
@@ -19,8 +22,17 @@ public class ClickTestPage extends ApplicationActions {
 	@FindBy(xpath=BUTTON_XPATH)
 	WebElement buttonElement;
 	
+	@FindBy(xpath=DISABLED_XPATH)
+	WebElement disabled;
+	
 	@FindBy(xpath=SINGLE_DROPDOWN_XPATH)
 	WebElement singleDropdownElement;
+	
+	@FindBy(xpath=INNER_TEXT_XPATH)
+	WebElement innerText;
+	
+	@FindBy(xpath=HIDDEN_XPATH)
+	WebElement hidden;
 	
 	@FindBy(xpath=MULTI_DROPDOWN_XPATH)
 	WebElement multiDropdownElement;
@@ -170,5 +182,37 @@ public class ClickTestPage extends ApplicationActions {
 	
 	public void select3AndRecord() {
 		super.selectDropDownByValue(SINGLE_DROPDOWN_XPATH, "3", "Single Drop Down");
+	}
+	
+	public String getInnerTextByElement() {
+		return super.getInnerText(innerText);
+	}
+	
+	public String getInnerTextByXPath() {
+		return super.getInnerText(INNER_TEXT_XPATH);
+	}
+	
+	public String getClassByElement() {
+		return super.getAttributeValue(innerText, "class");
+	}
+	
+	public String getClassByXPath() {
+		return super.getAttributeValue(INNER_TEXT_XPATH,"class");
+	}
+	
+	public boolean isDisplayedByXPath() {
+		return super.isDisplayed(INNER_TEXT_XPATH);
+	}
+	
+	public boolean isDisplayedByElement() {
+		return super.isDisplayed(hidden);
+	}
+	
+	public boolean isEnabledByXPath() {
+		return super.isEnabled(BUTTON_XPATH);
+	}
+	
+	public boolean isEnabledByElement() {
+		return super.isEnabled(disabled);
 	}
 }

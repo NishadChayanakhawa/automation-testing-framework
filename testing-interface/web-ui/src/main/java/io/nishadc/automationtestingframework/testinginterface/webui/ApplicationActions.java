@@ -59,6 +59,74 @@ public class ApplicationActions {
 	}
 	
 	/*
+	 * GetInner Text
+	 */
+	
+	protected String getInnerText(WebElement element) {
+		ApplicationActions.logger.debug("Extracting inner text for webelement {}",element);
+		String innerText=element.getText();
+		ApplicationActions.logger.debug("Extracted inner text {}",innerText);
+		return innerText;
+	}
+	
+	protected String getInnerText(String elementXPath) {
+		ApplicationActions.logger.debug("Extracting inner text for webelement identified by XPath {}",elementXPath);
+		WebElement element=driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elementXPath)));
+		return this.getInnerText(element);
+	}
+	
+	/*
+	 * Get Attribute
+	 */
+	
+	protected String getAttributeValue(WebElement element,String attributeName) {
+		ApplicationActions.logger.debug("Extracting value of attribute {} for webelement {}",attributeName,element);
+		String attributeValue=element.getAttribute(attributeName);
+		ApplicationActions.logger.debug("Extracted inner text {}",attributeValue);
+		return attributeValue;
+	}
+	
+	protected String getAttributeValue(String elementXPath,String attributeName) {
+		ApplicationActions.logger.debug("Extracting value of attribute {} for webelement identified by XPath {}",attributeName,elementXPath);
+		WebElement element=driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elementXPath)));
+		return this.getAttributeValue(element,attributeName);
+	}
+	
+	/*
+	 * Is Displayed
+	 */
+	
+	protected boolean isDisplayed(WebElement element) {
+		ApplicationActions.logger.debug("Checking if webelement {} is displayed",element);
+		boolean isDisplayed=element.isDisplayed();
+		ApplicationActions.logger.debug("Is Displayed: {}",isDisplayed);
+		return isDisplayed;
+	}
+	
+	protected boolean isDisplayed(String elementXPath) {
+		ApplicationActions.logger.debug("Checking if webelement identified by XPath {} is displayed",elementXPath);
+		WebElement element=driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elementXPath)));
+		return this.isDisplayed(element);
+	}
+	
+	/*
+	 * Is Enabled
+	 */
+	
+	protected boolean isEnabled(WebElement element) {
+		ApplicationActions.logger.debug("Checking if webelement {} is enabled",element);
+		boolean isEnabled=element.isEnabled();
+		ApplicationActions.logger.debug("Is Enabled: {}",isEnabled);
+		return isEnabled;
+	}
+	
+	protected boolean isEnabled(String elementXPath) {
+		ApplicationActions.logger.debug("Checking if webelement identified by XPath {} is enabled",elementXPath);
+		WebElement element=driverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(elementXPath)));
+		return this.isEnabled(element);
+	}
+	
+	/*
 	 * Send Text
 	 */
 	

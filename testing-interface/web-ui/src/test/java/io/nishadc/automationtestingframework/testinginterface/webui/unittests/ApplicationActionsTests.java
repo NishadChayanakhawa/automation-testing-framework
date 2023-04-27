@@ -131,4 +131,23 @@ public class ApplicationActionsTests  extends BaseWebTest {
 		Assertions.assertThat(clickTestPage.getMultiDropdownValue()).isEqualTo("1");
 		
 	}
+	
+	@Test
+	public void getTextTest() {
+		WebDriver driver=BaseWebTest.drivers.get();
+		TestFactory.recordTest("Deselect Tests", driver);
+		String url=BaseWebTest.getTestPageUrl("ClickTestPage");
+		driver.get(url);
+		
+		ClickTestPage clickTestPage=new ClickTestPage(driver);
+		Assertions.assertThat(clickTestPage.getInnerTextByElement()).isEqualTo("This is inner text");
+		Assertions.assertThat(clickTestPage.getInnerTextByXPath()).isEqualTo("This is inner text");
+		Assertions.assertThat(clickTestPage.getClassByElement()).isEqualTo("classTest");
+		Assertions.assertThat(clickTestPage.getClassByXPath()).isEqualTo("classTest");
+		Assertions.assertThat(clickTestPage.isDisplayedByXPath()).isTrue();
+		Assertions.assertThat(clickTestPage.isDisplayedByElement()).isFalse();
+		
+		Assertions.assertThat(clickTestPage.isEnabledByXPath()).isTrue();
+		Assertions.assertThat(clickTestPage.isEnabledByElement()).isFalse();
+	}
 }
