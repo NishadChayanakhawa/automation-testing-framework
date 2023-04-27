@@ -39,6 +39,7 @@
 	<modules>
 		<module>utilities</module>
 		<module>testng-cutomization</module>
+		<module>testing-interface</module>
 	</modules>
 
 	<distributionManagement>
@@ -222,6 +223,11 @@
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>file-handling</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>testng-cutomization</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
