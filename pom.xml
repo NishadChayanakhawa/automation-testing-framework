@@ -283,6 +283,11 @@
 				<artifactId>jackson-databind</artifactId>
 				<version>${jackson.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.dataformat</groupId>
+				<artifactId>jackson-dataformat-xml</artifactId>
+				<version>${jackson.version}</version>
+			</dependency>
 			<!--
 			https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 			<dependency>
@@ -332,9 +337,17 @@
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
 			<dependency>
-			    <groupId>org.hamcrest</groupId>
-			    <artifactId>hamcrest</artifactId>
-			    <version>${hamcrest.version}</version>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest</artifactId>
+				<version>${hamcrest.version}</version>
+			</dependency>
+
+			<!-- SOAP API -->
+			<!-- https://mvnrepository.com/artifact/com.sun.xml.ws/jaxws-rt -->
+			<dependency>
+				<groupId>com.sun.xml.ws</groupId>
+				<artifactId>jaxws-rt</artifactId>
+				<version>${jaxws-rt.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -367,5 +380,6 @@
 		<webdrivermanager.version>5.3.2</webdrivermanager.version>
 		<rest-assured.version>5.3.0</rest-assured.version>
 		<hamcrest.version>2.2</hamcrest.version>
+		<jaxws-rt.version>2.3.2</jaxws-rt.version>
 	</properties>
 </project>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="SOAP API Unit Tests">
+	<listeners>
+		<listener class-name="io.nishadc.automationtestingframework.testngcustomization.ReportGenerator"></listener>
+	</listeners>
+	<test name="SOAP API Test Helper Unit Tests">
+		<classes>
+			<class name="io.nishadc.automationtestingframework.testinginterface.soapapi.unittests.SOAPAPITestHelperTests" />
+		</classes>
+	</test>
+</suite>
