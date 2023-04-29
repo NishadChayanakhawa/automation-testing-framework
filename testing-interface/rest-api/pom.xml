@@ -35,13 +35,13 @@
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.hamcrest/hamcrest -->
 		<dependency>
-		    <groupId>org.hamcrest</groupId>
-		    <artifactId>hamcrest</artifactId>
+			<groupId>org.hamcrest</groupId>
+			<artifactId>hamcrest</artifactId>
 		</dependency>
 		<dependency>
-				<groupId>org.testng</groupId>
-				<artifactId>testng</artifactId>
-				<scope>test</scope>
-			</dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 </project>

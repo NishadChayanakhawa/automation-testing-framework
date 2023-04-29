@@ -12,5 +12,6 @@
   <modules>
   	<module>web-ui</module>
   	<module>rest-api</module>
+  	<module>soap-api</module>
   </modules>
 </project>
