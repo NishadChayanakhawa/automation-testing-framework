@@ -10,7 +10,7 @@
 	<artifactId>testng-cutomization</artifactId>
 	<name>TestNG Customization</name>
 	<description>TestNG Customization</description>
-	
+
 	<properties>
 		<jacoco-instruction-coveredratio.minimum>0.91</jacoco-instruction-coveredratio.minimum>
 		<jacoco-branch-coveredratio.minimum>0.85</jacoco-branch-coveredratio.minimum>
@@ -51,13 +51,32 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>file-handling</artifactId>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		<dependency>
+			<groupId>org.json</groupId>
+			<artifactId>json</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>logging</artifactId>
 		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
-			<artifactId>selenium-java</artifactId>
+			<artifactId>selenium-api</artifactId>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-chrome-driver</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.freemarker</groupId>

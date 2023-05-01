@@ -219,19 +219,38 @@
 				<groupId>${project.groupId}</groupId>
 				<artifactId>logging</artifactId>
 				<version>${project.version}</version>
+				<optional>true</optional>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>file-handling</artifactId>
 				<version>${project.version}</version>
+				<optional>true</optional>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>testng-cutomization</artifactId>
 				<version>${project.version}</version>
+				<optional>true</optional>
 			</dependency>
 
 			<!-- Utilities -->
+			<!-- Logging -->
+			<!--
+			https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+			<!--
+			https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${log4j.version}</version>
+			</dependency>
+
 			<!-- File Handling -->
 			<!-- https://mvnrepository.com/artifact/org.json/json -->
 			<dependency>
@@ -251,31 +270,14 @@
 				<artifactId>poi</artifactId>
 				<version>${poi.version}</version>
 			</dependency>
-			<!-- Logging -->
-			<!--
-			https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-api -->
-			<dependency>
-				<groupId>org.apache.logging.log4j</groupId>
-				<artifactId>log4j-api</artifactId>
-				<version>${log4j.version}</version>
-			</dependency>
-			<!--
-			https://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core -->
-			<dependency>
-				<groupId>org.apache.logging.log4j</groupId>
-				<artifactId>log4j-core</artifactId>
-				<version>${log4j.version}</version>
-			</dependency>
 
-			<!-- TestNG Components & Module Testing -->
+			<!-- TestNG Customizations -->
 			<!-- https://mvnrepository.com/artifact/org.testng/testng -->
 			<dependency>
 				<groupId>org.testng</groupId>
 				<artifactId>testng</artifactId>
 				<version>${testng.version}</version>
 			</dependency>
-
-			<!-- TestNG Customizations -->
 			<!--
 			https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 			<dependency>
@@ -301,31 +303,35 @@
 				<artifactId>freemarker</artifactId>
 				<version>${freemarker.version}</version>
 			</dependency>
+			<!--
+			https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-api</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
+			<!--
+			https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver -->
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-chrome-driver</artifactId>
+				<version>${selenium.version}</version>
+			</dependency>
 
 			<!-- Web UI -->
 			<!--
-			https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-api -->
+			https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
 			<dependency>
 				<groupId>org.seleniumhq.selenium</groupId>
 				<artifactId>selenium-java</artifactId>
 				<version>${selenium.version}</version>
 			</dependency>
-
-			<!-- Testing -->
-			<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
-			<dependency>
-				<groupId>org.assertj</groupId>
-				<artifactId>assertj-core</artifactId>
-				<version>${assertj.version}</version>
-				<scope>test</scope>
-			</dependency>
 			<!--
-			https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+			https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-support -->
 			<dependency>
-				<groupId>io.github.bonigarcia</groupId>
-				<artifactId>webdrivermanager</artifactId>
-				<version>${webdrivermanager.version}</version>
-				<scope>test</scope>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-support</artifactId>
+				<version>${selenium.version}</version>
 			</dependency>
 
 			<!-- REST API -->
@@ -343,11 +349,29 @@
 			</dependency>
 
 			<!-- SOAP API -->
-			<!-- https://mvnrepository.com/artifact/com.sun.xml.ws/jaxws-rt -->
+			<!-- https://mvnrepository.com/artifact/xml-apis/xml-apis -->
 			<dependency>
-				<groupId>com.sun.xml.ws</groupId>
-				<artifactId>jaxws-rt</artifactId>
-				<version>${jaxws-rt.version}</version>
+				<groupId>xml-apis</groupId>
+				<artifactId>xml-apis</artifactId>
+				<version>${xml-apis}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Testing -->
+			<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+			<dependency>
+				<groupId>org.assertj</groupId>
+				<artifactId>assertj-core</artifactId>
+				<version>${assertj.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<!--
+			https://mvnrepository.com/artifact/io.github.bonigarcia/webdrivermanager -->
+			<dependency>
+				<groupId>io.github.bonigarcia</groupId>
+				<artifactId>webdrivermanager</artifactId>
+				<version>${webdrivermanager.version}</version>
+				<scope>test</scope>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
@@ -381,5 +405,6 @@
 		<rest-assured.version>5.3.0</rest-assured.version>
 		<hamcrest.version>2.2</hamcrest.version>
 		<jaxws-rt.version>2.3.2</jaxws-rt.version>
+		<xml-apis>1.4.01</xml-apis>
 	</properties>
 </project>
