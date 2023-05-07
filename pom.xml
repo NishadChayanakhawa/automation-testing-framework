@@ -233,6 +233,12 @@
 				<version>${project.version}</version>
 				<optional>true</optional>
 			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>rest-api</artifactId>
+				<version>${project.version}</version>
+				<optional>true</optional>
+			</dependency>
 
 			<!-- Utilities -->
 			<!-- Logging -->
@@ -353,7 +359,22 @@
 			<dependency>
 				<groupId>xml-apis</groupId>
 				<artifactId>xml-apis</artifactId>
-				<version>${xml-apis}</version>
+				<version>${xml-apis.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- BDD -->
+			<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-java -->
+			<dependency>
+				<groupId>io.cucumber</groupId>
+				<artifactId>cucumber-java</artifactId>
+				<version>${cucumber.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/io.cucumber/cucumber-testng -->
+			<dependency>
+				<groupId>io.cucumber</groupId>
+				<artifactId>cucumber-testng</artifactId>
+				<version>${cucumber.version}</version>
 				<scope>test</scope>
 			</dependency>
 
@@ -405,6 +426,7 @@
 		<rest-assured.version>5.3.0</rest-assured.version>
 		<hamcrest.version>2.2</hamcrest.version>
 		<jaxws-rt.version>2.3.2</jaxws-rt.version>
-		<xml-apis>1.4.01</xml-apis>
+		<xml-apis.version>1.4.01</xml-apis.version>
+		<cucumber.version>7.12.0</cucumber.version>
 	</properties>
 </project>
