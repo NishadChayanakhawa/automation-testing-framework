@@ -13,5 +13,6 @@
   	<module>web-ui</module>
   	<module>rest-api</module>
   	<module>soap-api</module>
+  	<module>rest-api-bdd</module>
   </modules>
 </project>
