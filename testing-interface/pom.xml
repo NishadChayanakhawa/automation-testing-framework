@@ -14,5 +14,6 @@
   	<module>rest-api</module>
   	<module>soap-api</module>
   	<module>rest-api-bdd</module>
+  	<module>soap-api-bdd</module>
   </modules>
 </project>

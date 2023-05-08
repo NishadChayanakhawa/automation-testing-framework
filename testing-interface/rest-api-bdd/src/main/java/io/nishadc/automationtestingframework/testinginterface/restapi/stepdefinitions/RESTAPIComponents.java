@@ -27,7 +27,7 @@ public class RESTAPIComponents {
 		RESTAPIComponents.parameterMaps.get().put(parameterName, parameterValue);
 	}
 
-	protected static void releaseComponentes() {
+	protected static void releaseComponents() {
 		RESTAPIComponents.headerMaps.remove();
 		RESTAPIComponents.parameterMaps.remove();
 		RESTAPIComponents.responses.remove();
