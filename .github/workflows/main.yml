@@ -20,7 +20,7 @@ jobs:
         distribution: 'temurin'
         
     - name: Verify with Maven
-      run: mvn --% clean verify "-Dgpg.skip"
+      run: mvn clean verify -Dgpg.skip
       
     - name: Cache SonarCloud packages
       uses: actions/cache@v2
