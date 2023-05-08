@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.github.nishadchayanakhawa</groupId>
 	<artifactId>automation-testing-framework</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<packaging>pom</packaging>
 
 	<name>Automation Testing Framework</name>
@@ -219,31 +219,26 @@
 				<groupId>${project.groupId}</groupId>
 				<artifactId>logging</artifactId>
 				<version>${project.version}</version>
-				<optional>true</optional>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>file-handling</artifactId>
 				<version>${project.version}</version>
-				<optional>true</optional>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>testng-cutomization</artifactId>
 				<version>${project.version}</version>
-				<optional>true</optional>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>rest-api</artifactId>
 				<version>${project.version}</version>
-				<optional>true</optional>
 			</dependency>
 			<dependency>
 				<groupId>${project.groupId}</groupId>
 				<artifactId>soap-api</artifactId>
 				<version>${project.version}</version>
-				<optional>true</optional>
 			</dependency>
 
 			<!-- Utilities -->

@@ -1,0 +1,331 @@
+:release-version: 1.0.0
+:release-date: 8th May 2023
+== Testing Interfaces
+
+=== Web UI
+
+Module offers interfaces to interact with Web UI using Selenium.
+
+=== Adding dependency
+
+[source,xml,subs=attributes+]
+----
+<!-- https://mvnrepository.com/artifact/io.github.nishadchayanakhawa/web-ui -->
+<dependency>
+    <groupId>io.github.nishadchayanakhawa</groupId>
+    <artifactId>web-ui</artifactId>
+    <version>{release-version}</version>
+</dependency>
+----
+
+=== Code Illustration
+
+Page object models can extend _ApplicationActions_ class. This class provides methods to interact with _WebElement_. Also, logs and test steps are generated
+automatically.
+
+[source,java]
+----
+import io.nishadc.automationtestingframework.testinginterface.webui.ApplicationActions;
+
+public class TestPage extends ApplicationActions {
+	public TestPage(WebDriver driver) {
+		super(driver);//call super class constructor to register driver
+		PageFactory.initElements(driver, this);
+	}
+	public void performClickThroughElement() {
+		super.clickElement(buttonElement);//to click element
+	}
+	public void performClickThroughXPath() {
+		super.clickElement(BUTTON_XPATH);//to locate element using XPath and click
+	}
+	public void performClickThroughElementAndRecordStep() {
+		super.clickElement(buttonElement,"Increment");//to click element and record test step
+		//test step recorded as 'Clicked on Increment'
+	}
+	//demonstration is for clickElement only, but class provides many other methods for interactions
+	...
+}
+----
+
+== TestNG Customization
+
+=== Adding dependency
+
+[source,xml,subs=attributes+]
+----
+<!-- https://mvnrepository.com/artifact/io.github.nishadchayanakhawa/testng-cutomization -->
+<dependency>
+    <groupId>io.github.nishadchayanakhawa</groupId>
+    <artifactId>testng-cutomization</artifactId>
+    <version>{release-version}</version>
+</dependency>
+----
+
+=== Code Illustration
+
+==== Test Data Injection
+
+===== Test Data Injection from Excel
+
+[source,java]
+----
+public class ExcelTestDataProviderIllustration {
+	@Test(dataProvider="getTestDataFromExcel",
+			dataProviderClass=io.nishadc.automationtestingframework.testngcustomization.TestDataProvider.class)
+	public void getTestDataFromExcel(Map<String,Object> testData) {
+		Object value1=testData.get("Column1HeaderText");
+		Object value2=testData.get("Column2HeaderText");
+		...
+	}
+}
+----
+
+====== Conventions
+
+* Excel workbook must be placed at _src/test/resources/TestData_ folder.
+* *Workbook name* should be exactly same as _Class Name_.
+* *Worksheet name* should be exactly same as _Method Name_.
+* Test data is injected as _Map<String,Object>_. Excel data column header is _key_, while corresponding row content is _value_ to the map.
+* Only _.xls_ and _.xlsx_ formats are supported.
+
+===== Test Data Injection from JSON
+
+[source,java]
+----
+public class JsonTestDataProviderTests {
+	@Test(dataProvider="getTestDataFromJson",
+			dataProviderClass=io.nishadc.automationtestingframework.testngcustomization.TestDataProvider.class)
+	public void getTestDataFromJson_test(Map<String,Object> testData) {
+		Object value1=testData.get("Parameter1");	//value: Value1
+		Object value1=testData.get("Parameter2");	//value: 1
+		Object value1=testData.get("Parameter3");	//value: false
+		Object value1=testData.get("Parameter4");	//value: 4.400000
+		Object value1=testData.get("Parameter5");	//value: 5.555000
+	}
+}
+----
+
+====== Conventions
+
+* JSON files must be placed at _src/test/resources/TestData/{TestClassName}_ folder.
+* Folder should be present under _src/test/resources/TestData/_ with exactly same name as _Class Name_.
+* JSON file name should be exactly same as _Method Name_.
+
+```mermaid
+graph TD
+classDef folder fill:#f5f5f5;
+classDef file fill:#fff;
+
+root((project-root)):::folder;
+testResources((src/test/resources)):::folder;
+testData((TestData)):::folder;
+JsonTestDataProviderTests((JsonTestDataProviderTests)):::folder;
+
+testResources--> testData;
+testData--> JsonTestDataProviderTests;
+root --> testResources;
+
+JsonTestDataProviderTests--> getTestDataFromJson_test.json:::file;
+```
+
+* JSON Test data should be present as array of test data rows, with array assigned to key _testData_. For above code snippet data will be-
+
+[source,json]
+----
+{
+	"testData" : [
+		{
+			"Parameter1" : "Value1",
+			"Parameter2" : 1,
+			"Parameter3" : false,
+			"Parameter4" : 4.400000,
+			"Parameter5" : 5.555000	
+		},
+		{
+			"Parameter1" : "Value2",
+			"Parameter2" : 2,
+			"Parameter3" : true
+		},
+		{
+			"Parameter1" : "Value3",
+			"Parameter2" : 3	
+		}
+	]
+}
+----
+
+==== Reporting
+
+[source,java]
+----
+import io.nishadc.automationtestingframework.testngcustomization.TestFactory;
+
+public class TestClass {
+	@Test
+	public void testMethod1() {
+		TestFactory.recordTest("Test Case Name");
+		TestFactory.recordTestStep("Test step text");
+	}
+	
+	@Test
+	public void testMethod2() {
+		WebDriver driver;//steps for setting up driver are excluded.
+		TestFactory.recordTest("Test Case Name",driver); //driver can be attached to enable automatic screenshots
+		TestFactory.recordTestStep("Test step text");
+		TestFactory.recordTestStep("Test step text with screenshot",true);//flag can be set to true to attach screenshot to test step
+	}
+}
+----
+
+testng.xml snippet for adding listener
+
+[source,xml]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="TestNG Customizations Unit Tests">
+	<listeners>
+		<listener class-name="io.nishadc.automationtestingframework.testngcustomization.ReportGenerator"></listener>
+	</listeners>
+	<test name="JSON Data Provider Unit Tests">
+		<classes>
+			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.JsonTestDataProviderTests" />
+		</classes>
+	</test>
+</suite>
+----
+
+===== Conventions & Notes
+
+* Report is automatically generated as _target/TestExecutionReport.html_
+* If _TestFactory.recordTest_ method is not called to register test case name, test method name is used as test case name.
+* _TestFactory.recordTest_ can be called multiple times in single test method, resulting in multiple test cases in report for modular view.
+* Attaching _WebDriver_ while recording test also enables automatic screenshots on test failure.
+
+== Utilities
+
+=== File Handling
+
+Provides an interface to work with flat, excel and json files
+
+==== Adding dependency
+
+[source,xml,subs=attributes+]
+----
+<!-- https://mvnrepository.com/artifact/io.github.nishadchayanakhawa/file-handling -->
+<dependency>
+    <groupId>io.github.nishadchayanakhawa</groupId>
+    <artifactId>file-handling</artifactId>
+    <version>{release-version}</version>
+</dependency>
+----
+
+==== Code Illustration
+
+===== Flat File Handling
+
+[source,java]
+----
+import io.nishadc.automationtestingframework.filehandling.FlatFileHandling;
+import io.nishadc.automationtestingframework.filehandling.exceptions.FlatFileHandlingException;
+
+...
+public static void readFromFlatFile {
+	try {
+		String flatFileContent=
+			FlatFileHandling.getFileContents("./src/test/resources/TestFile");
+	} catch(FlatFileHandlingException e) {
+		//Exception handling
+	}
+}
+...
+----
+
+===== Excel File Handling
+
+[source,java]
+----
+import io.nishadc.automationtestingframework.filehandling.ExcelFileHandling;
+import io.nishadc.automationtestingframework.filehandling.exceptions.ExcelFileHandlingException;
+
+...
+public static void readFromExcelFile {
+	try {
+		List<Map<String,Object>> excelFileContent=
+			ExcelFileHandling.getExcelSheetContent("./src/test/resources/WorkbookName.xls", "WorkSheetName");
+	} catch(ExcelFileHandlingException e) {
+		//Exception handling
+	}
+}
+...
+----
+
+[NOTE]
+===================
+* Data is returned as _List_ of _Map<String,Object>_.
+* Each Map in List corresponds to a row in Excel sheet.
+* Excel column header is used as _key_ to the map, while corresponding row content is the _value_.
+===================
+
+===== JSON File Handling
+
+[source,java]
+----
+import io.nishadc.automationtestingframework.filehandling.JsonFileHandling;
+import io.nishadc.automationtestingframework.filehandling.exceptions.FlatFileHandlingException;
+import io.nishadc.automationtestingframework.filehandling.exceptions.JsonFileHandlingException;
+import org.json.JSONObject;
+
+...
+public static void readFromJsonFile {
+	try {
+		JSONObject jsonFileContent=
+			JsonFileHandling.getJsonFileContent("./src/test/resources/TestFile.json");
+	} catch(FlatFileHandlingException e) {
+		//Exception handling
+	} catch(JsonFileHandlingException e) {
+		//Exception handling
+	}
+}
+...
+----
+
+=== Logging
+
+Logging module provides an interface to create custom Logger instance with pre-coded settings.
+
+==== Adding dependency
+
+[source,xml,subs=attributes+]
+----
+<!-- https://mvnrepository.com/artifact/io.github.nishadchayanakhawa/logging -->
+<dependency>
+    <groupId>io.github.nishadchayanakhawa</groupId>
+    <artifactId>logging</artifactId>
+    <version>{release-version}</version>
+</dependency>
+----
+
+==== Code Illustration
+
+Please refer to below code snippet that explains packages to be imported and method implemented to create Logger instance
+
+[source,java]
+----
+import io.nishadc.automationtestingframework.logging.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+
+public class MyClass {
+	public static final Logger logger=LoggerFactory.create(MyClass.class);
+}
+----
+
+==== Conventions
+
+* Logs for all level are written to file _target/execution.log_
+* Logs for INFO and above levels are printed on console as well
+* Logs are printed in below pattern
+
+----
+[Level] [Timestamp] [Thread] - [Message]
+----
