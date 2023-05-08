@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.github.nishadchayanakhawa</groupId>
 		<artifactId>testing-interface</artifactId>
-		<version>1.0.0</version>
+		<version>1.0.1</version>
 	</parent>
 	<artifactId>rest-api</artifactId>
 	<name>Rest API</name>
