@@ -239,6 +239,12 @@
 				<version>${project.version}</version>
 				<optional>true</optional>
 			</dependency>
+			<dependency>
+				<groupId>${project.groupId}</groupId>
+				<artifactId>soap-api</artifactId>
+				<version>${project.version}</version>
+				<optional>true</optional>
+			</dependency>
 
 			<!-- Utilities -->
 			<!-- Logging -->
