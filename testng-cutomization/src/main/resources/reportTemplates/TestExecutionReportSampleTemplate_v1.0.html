@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
 	<title>Test Execution Report</title>
@@ -6,7 +7,7 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-win8.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 	<script>
 		$(document).ready(function() {
 			$("button#openSidebar").click(function() {
@@ -46,7 +47,7 @@
 			<div class="w3-container">
 				<span class="w3-button w3-display-topright"
 					onclick="document.getElementById('imageViewer').style.display='none'">&times;</span>
-				<img id="imageModal" class="w3-image" />
+				<img id="imageModal" class="w3-image" alt="Screenshot" />
 			</div>
 		</div>
 	</div>
@@ -86,6 +87,7 @@
 		<div id="mainContent_dashboard" class="w3-container">Dashboard Content</div>
 		<div id="mainContent_summary" class="w3-container" style="display:none;">
 			<table class="w3-table w3-tiny">
+				<caption>Test Result Summary</caption>
 				<thead class="w3-win8-cobalt">
 					<th>Test Suite Name</th>
 					<th>Test Name</th>
