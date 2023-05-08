@@ -15,10 +15,10 @@ public class ResponseValidationSteps {
 	    			expectedStatusCode,null);
 	}
 	
-	@Then("Value at Json Path {string} should be {string}")
+	@Then("Validate that value at Json Path {string} in response is {string}")
 	public void value_at_json_path_should_be(String jsonPath, String expectedValue) {
 		TestFactory.recordTestStep(
-				String.format("Value at Json Path <b>%s</b> should be <b>%s</b>", jsonPath,expectedValue));
+				String.format("Validate that value at Json Path <b>%s</b> in response is <b>%s</b>", jsonPath,expectedValue));
 		Map<String,Object> validationMap=new HashMap<>();
 		validationMap.put(jsonPath, expectedValue);
 		RESTAPITestHelper.validateResponse

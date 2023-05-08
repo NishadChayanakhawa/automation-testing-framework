@@ -20,4 +20,13 @@ public class RequestHeaderHandlingSteps {
 					dataTableRow.get("Header Name"), dataTableRow.get("Header Value"));
 		}
 	}
+	
+	@Given("In request header, set {string} to value of variable {string}")
+	public void in_request_header_set_to_value_of_variable(String headerName, String variableName) {
+		String variableValue=RESTAPIComponents.variableMap.get(variableName);
+		TestFactory.recordTestStep(String.format(
+				"In request header, set <b>%s</b> to value of variable <b>%s</b>.(Value: %s)",
+				headerName, variableName,variableValue));
+		this.in_request_header_set_to(headerName, variableValue);
+	}
 }
