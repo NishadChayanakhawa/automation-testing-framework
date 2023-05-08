@@ -8,6 +8,8 @@ public class RESTAPIComponents {
 	protected static ThreadLocal<Map<String, String>> headerMaps = new ThreadLocal<>();
 	protected static ThreadLocal<Map<String, String>> parameterMaps = new ThreadLocal<>();
 	protected static ThreadLocal<ValidatableResponse> responses=new ThreadLocal<>();
+	protected static ThreadLocal<String> requestBodyTemplates=new ThreadLocal<>();
+	protected static ThreadLocal<Map<String, String>> variables = new ThreadLocal<>();
 	
 	private RESTAPIComponents() {
 		
@@ -25,6 +27,10 @@ public class RESTAPIComponents {
 			RESTAPIComponents.parameterMaps.set(new HashMap<>());
 		}
 		RESTAPIComponents.parameterMaps.get().put(parameterName, parameterValue);
+	}
+	
+	protected static void setRequestBodyTemplate(String requestBodyTemplate) {
+		RESTAPIComponents.requestBodyTemplates.set(requestBodyTemplate);
 	}
 
 	protected static void releaseComponents() {
