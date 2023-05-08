@@ -11,7 +11,7 @@ import io.nishadc.automationtestingframework.testngcustomization.TestFactory;
 public class HookSteps {
 	private static final Logger logger=LoggerFactory.create(HookSteps.class);
 	@Before
-	public void setupBddTest(Scenario scenario) throws IllegalArgumentException {
+	public void setupBddTest(Scenario scenario) {
 		String scnerioName=scenario.getName();
 		HookSteps.logger.debug("Strated scenario {}",scnerioName);
 		TestFactory.recordTest(scnerioName);
