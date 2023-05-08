@@ -94,7 +94,7 @@ public class SOAPAPITestHelper {
 		// convert SOAP Message body to XML String
 		try (ByteArrayOutputStream responseOutputStream = new ByteArrayOutputStream()) {
 			soapMessage.writeTo(responseOutputStream);
-			return new String(responseOutputStream.toByteArray());
+			return responseOutputStream.toString(java.nio.charset.StandardCharsets.UTF_8.toString());
 		}
 	}
 
