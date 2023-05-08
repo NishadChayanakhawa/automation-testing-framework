@@ -178,4 +178,18 @@ public class RESTAPITestHelper {
 			}
 		}
 	}
+	
+	/**
+	 * <b>Method Name</b>: query<br>
+	 * <b>Description</b>: Queries Json response and returns value found at specified Json Path.<br>
+	 * @since v1.0.0
+	 * @param response Validatable response as {@link io.restassured.response.ValidatableResponse ValidatableResponse}
+	 * @param jsonPath Json Path as {@link java.lang.String String}
+	 * @return Object found as :{@link java.lang.Object Object}
+	 */
+	public static Object query(ValidatableResponse response,String jsonPath) {
+		return response
+				.extract()
+				.path(jsonPath);
+	}
 }

@@ -1,8 +1,13 @@
 package io.nishadc.automationtestingframework.testinginterface.restapi.unittests;
 
 import org.testng.annotations.Test;
+
+import dev.failsafe.internal.util.Assert;
+
 import java.util.Map;
 import java.util.HashMap;
+
+import org.assertj.core.api.Assertions;
 import org.json.JSONObject;
 import io.nishadc.automationtestingframework.testinginterface.restapi.RESTAPITestHelper;
 import io.nishadc.automationtestingframework.testinginterface.restapi.RESTAPITestHelper.RequestMethod;
@@ -48,6 +53,9 @@ public class RESTAPITestHelperTests {
 		
 		Map<String,Object> validationsMap=new HashMap<String, Object>();
 		validationsMap.put("data.id",1);
+		
+		int dataId=(int) RESTAPITestHelper.query(response, "data.id");
+		Assertions.assertThat(dataId).isEqualTo(1);
 		
 		RESTAPITestHelper.validateResponse(response, 0, validationsMap);
 	}

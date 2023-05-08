@@ -23,4 +23,11 @@ public class RequestBodyHandlingSteps {
 		TestFactory.recordTestStep(String.format("In request body template, replace <b>%s</b> with <b>%s</b>",
 				placeholder, actualValue));
 	}
+	@Given("In request body template, replace {string} with value of variable {string}")
+	public void in_request_body_template_replace_with_value_of_variable(String placeholder, String variableName) {
+	    String variableValue=RESTAPIComponents.variableMap.get(variableName);
+	    TestFactory.recordTestStep(String.format("In request body template, replace <b>%s</b> with value of variable <b>%s</b>. (Value: %s)",
+				placeholder, variableName,variableValue));
+	    this.in_request_body_template_replace_with(placeholder, variableValue);
+	}
 }
