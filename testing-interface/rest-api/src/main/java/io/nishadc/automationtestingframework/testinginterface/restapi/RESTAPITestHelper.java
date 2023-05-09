@@ -8,6 +8,7 @@ import org.hamcrest.Matchers;
 import org.json.JSONObject;
 
 import io.nishadc.automationtestingframework.logging.LoggerFactory;
+import io.nishadc.automationtestingframework.testinginterface.restapi.exceptions.RESTAPICallException;
 import io.nishadc.automationtestingframework.testngcustomization.TestFactory;
 import io.restassured.RestAssured;
 import io.restassured.response.ValidatableResponse;
@@ -93,33 +94,12 @@ public class RESTAPITestHelper {
 	 */
 	public static ValidatableResponse getRespones(RequestSpecification request,String url,RequestMethod requestMethod) {
 		RESTAPITestHelper.logger.debug("Submitting response as {} to {}",requestMethod,url);
-		ValidatableResponse response=null;
-		//call restassured method based on request method type
-		switch(requestMethod) {
-		case DELETE:
-			response=request.delete(url).then();
-			break;
-		case GET:
-			response=request.get(url).then();
-			break;
-		case OPTIONS:
-			response=request.options(url).then();
-			break;
-		case PATCH:
-			response=request.patch(url).then();
-			break;
-		case POST:
-			response=request.post(url).then();
-			break;
-		case PUT:
-			response=request.put(url).then();
-			break;
-		}
+		ValidatableResponse response=RESTAPITestHelper.submitRequest(request, url, requestMethod);
 		
 		//log responses
 		RESTAPITestHelper.logger.debug("Response Status code: {}",response.extract().statusCode());
 		RESTAPITestHelper.logger.debug("Response Headers: {}",response.extract().headers());
-		RESTAPITestHelper.logger.debug("Response Body: {}",response.extract().body().asPrettyString());
+		RESTAPITestHelper.logger.debug(() -> "Response Body: " + response.extract().body().asPrettyString());
 		
 		//Add test steps
 		TestFactory.recordTestStep(String.format("Response status code: %d", response.extract().statusCode()));
@@ -128,6 +108,25 @@ public class RESTAPITestHelper {
 		
 		//return response
 		return response;
+	}
+	
+	private static ValidatableResponse submitRequest(RequestSpecification request,String url,RequestMethod requestMethod) {
+		//call restassured method based on request method type
+		switch(requestMethod) {
+		case DELETE:
+			return request.delete(url).then();
+		case GET:
+			return request.get(url).then();
+		case OPTIONS:
+			return request.options(url).then();
+		case PATCH:
+			return request.patch(url).then();
+		case POST:
+			return request.post(url).then();
+		case PUT:
+			return request.put(url).then();
+		}
+		throw new RESTAPICallException("Invalid request method.");
 	}
 	
 	/**
