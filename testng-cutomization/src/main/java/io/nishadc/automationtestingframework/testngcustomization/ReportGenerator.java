@@ -24,6 +24,7 @@ public class ReportGenerator implements ITestListener,IReporter {
 		ReportGenerator.logger.debug("Test Results:\n{}",testExecutionReport);
 		
 		HTMLReportGenerator.generateHTMLReport("TestExecutionReportSampleTemplate_v1.0", testExecutionReport.toMap(),"TestExecutionReport");
+		HTMLReportGenerator.generateHTMLReport("MailableSummaryTemplate_v1.0", testExecutionReport.toMap(),"MailableSummary");
 	}
 
 	private static final Logger logger=LoggerFactory.create(ReportGenerator.class);

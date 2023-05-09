@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Mailable Summary</title>
+	<style>
+		table {
+			width: 100%;
+			display: table;
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+		th,
+		td {
+			border-collapse: collapse;
+			border-spacing: 0;
+			font-size: 15px;
+			padding: 8px 8px;
+			display: table-cell;
+			text-align: left;
+			vertical-align: top;
+		}
+
+		thead {
+			background-color: royalblue;
+			color: white;
+		}
+
+		tr.Critical {
+			background-color: crimson;
+			color: white;
+		}
+
+		tr.Fail {
+			background-color: palevioletred;
+			color: black;
+		}
+
+		tr.Pass {
+			background-color: palegreen;
+			color: black;
+		}
+	</style>
+</head>
+
+<body>
+	<table>
+		<caption>Test Result Summary</caption>
+		<thead>
+			<th>Test Suite Name</th>
+			<th>Test Name</th>
+			<th style="text-align:center;">Total Tests</th>
+			<th style="text-align:center;">Passed Tests</th>
+			<th style="text-align:center;">Conditionally Passed Tests</th>
+			<th style="text-align:center;">Failed Tests</th>
+			<th style="text-align:center;">Skipped Tests</th>
+			<th style="text-align:center;">Start Timestamp</th>
+			<th style="text-align:center;">End Timestamp</th>
+			<th style="text-align:center;">Elapsed Time</th>
+		</thead>
+		<tbody>
+			<#list testSets as testSet>
+				<#if testSet.passedTests==0>
+					<tr class="Critical">
+						<#elseif testSet.failedTests !=0>
+					<tr class="Fail">
+						<#else>
+					<tr class="Pass">
+				</#if>
+				<td>${testSet.suiteName}</td>
+				<td>${testSet.name}</td>
+				<td style="text-align:center;">${testSet.totalTests}</td>
+				<td style="text-align:center;">${testSet.passedTests}</td style="text-align:center;">
+				<td style="text-align:center;">${testSet.conditionallyPassedTests}</td style="text-align:center;">
+				<td style="text-align:center;">${testSet.failedTests}</td style="text-align:center;">
+				<td style="text-align:center;">${testSet.skippedTests}</td style="text-align:center;">
+				<td style="text-align:center;">${testSet.startTimestamp}</td>
+				<td style="text-align:center;">${testSet.endTimestamp}</td>
+				<td style="text-align:center;">${testSet.elapsedTime}</td style="text-align:center;">
+				</tr>
+			</#list>
+		</tbody>
+	</table>
+</body>
+
+</html>
