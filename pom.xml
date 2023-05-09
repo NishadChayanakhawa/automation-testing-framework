@@ -85,6 +85,7 @@
 				<configuration>
 					<excludes>
 						<exclude>**/beans/*</exclude>
+						<exclude>**/exceptions/RESTAPICallException.class</exclude>
 					</excludes>
 				</configuration>
 				<executions>

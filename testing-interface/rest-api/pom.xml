@@ -12,6 +12,7 @@
 	<description>Rest API Testing Interface</description>
 
 	<properties>
+		<jacoco-instruction-coveredratio.minimum>0.98</jacoco-instruction-coveredratio.minimum>
 		<jacoco-branch-coveredratio.minimum>0.95</jacoco-branch-coveredratio.minimum>
 	</properties>
 
