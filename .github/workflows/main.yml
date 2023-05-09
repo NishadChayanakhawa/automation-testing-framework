@@ -19,7 +19,7 @@ jobs:
         java-version: '8'
         distribution: 'temurin'
         
-    - name: Verify with Maven
+    - name: Test
       run: mvn clean verify -Dgpg.skip
     
     - name: Set up JDK 11
