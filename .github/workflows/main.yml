@@ -21,16 +21,8 @@ jobs:
         
     - name: Verify with Maven
       run: mvn clean verify -Dgpg.skip
-      
-    - name: Cache SonarCloud packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.sonar/cache
-        key: ${{ runner.os }}-sonar
-        restore-keys: |
-          ${{ runner.os }}-sonar
     
     - name: SonarCloud Scan
-      uses: sonarsource/sonarcloud-github-action@master
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: mvn sonar:sonar -Dsonar.projectKey=NishadChayanakhawa_automation-testing-framework -Dsonar.organization=nishadchayanakhawa -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=$SONAR_TOKEN
