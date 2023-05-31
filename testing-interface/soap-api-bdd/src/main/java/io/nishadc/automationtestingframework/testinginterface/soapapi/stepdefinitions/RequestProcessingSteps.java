@@ -2,12 +2,11 @@ package io.nishadc.automationtestingframework.testinginterface.soapapi.stepdefin
 
 import java.io.IOException;
 
-import javax.xml.soap.SOAPException;
-import javax.xml.soap.SOAPMessage;
-
 import io.cucumber.java.en.When;
 import io.nishadc.automationtestingframework.testinginterface.soapapi.SOAPAPITestHelper;
 import io.nishadc.automationtestingframework.testngcustomization.TestFactory;
+import jakarta.xml.soap.SOAPException;
+import jakarta.xml.soap.SOAPMessage;
 
 public class RequestProcessingSteps {
 	@When("SOAP request is sent to {string}")

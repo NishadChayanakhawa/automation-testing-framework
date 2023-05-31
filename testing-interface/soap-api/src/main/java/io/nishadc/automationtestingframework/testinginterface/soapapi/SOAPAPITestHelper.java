@@ -5,25 +5,27 @@ import java.util.Map;
 import java.util.Map.Entry;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
-import javax.xml.soap.MessageFactory;
-import javax.xml.soap.SOAPMessage;
+
+
 import javax.xml.xpath.XPath;
 import javax.xml.namespace.NamespaceContext;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
-import javax.xml.soap.MimeHeaders;
-import javax.xml.soap.SOAPBody;
-import javax.xml.soap.SOAPConnection;
-import javax.xml.soap.SOAPConnectionFactory;
-import javax.xml.soap.SOAPException;
+
 import org.apache.logging.log4j.Logger;
 import org.json.JSONObject;
 
 import io.nishadc.automationtestingframework.logging.LoggerFactory;
 import io.nishadc.automationtestingframework.testngcustomization.TestFactory;
-
+import jakarta.xml.soap.MessageFactory;
+import jakarta.xml.soap.SOAPBody;
+import jakarta.xml.soap.SOAPConnection;
+import jakarta.xml.soap.SOAPConnectionFactory;
+import jakarta.xml.soap.SOAPException;
+import jakarta.xml.soap.SOAPMessage;
+import jakarta.xml.soap.MimeHeaders;
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -54,7 +56,7 @@ public class SOAPAPITestHelper {
 	 *                   Map&lt;String,String&gt;}
 	 * @param soapAction SOAP Action as {@link java.lang.String String}
 	 * @param payload    XML Request Payload as {@link java.lang.String String}
-	 * @return SOAP Message as {@link javax.xml.soap.SOAPMessage SOAPMessage}
+	 * @return SOAP Message as {@link jakarta.xml.soap.SOAPMessage SOAPMessage}
 	 * @throws IOException   in case of issues in working with XML streams
 	 * @throws SOAPException in case of issues is SOAP request formation
 	 */
@@ -103,10 +105,10 @@ public class SOAPAPITestHelper {
 	 * <b>Description</b>: Get SOAP Response<br>
 	 * 
 	 * @since v1.0.0
-	 * @param soapRequest SOAP request as {@link javax.xml.soap.SOAPMessage
+	 * @param soapRequest SOAP request as {@link jakarta.xml.soap.SOAPMessage
 	 *                    SOAPMessage}
 	 * @param endpointUrl Endpoint URL as {@link java.lang.String String}
-	 * @return SOAP Response as {@link javax.xml.soap.SOAPMessage SOAPMessage}
+	 * @return SOAP Response as {@link jakarta.xml.soap.SOAPMessage SOAPMessage}
 	 * @throws SOAPException in case of issues is SOAP requests
 	 * @throws IOException   in case of issues in working with XML streams
 	 */
@@ -164,7 +166,7 @@ public class SOAPAPITestHelper {
 	 * <b>Description</b>: Query SOAP Body with XPath<br>
 	 * 
 	 * @since v1.0.0
-	 * @param response        SOAP Response as {@link javax.xml.soap.SOAPMessage
+	 * @param response        SOAP Response as {@link jakarta.xml.soap.SOAPMessage
 	 *                        SOAPMessage}
 	 * @param namespacePrefix XML namespace prefix as {@link java.lang.String
 	 *                        String}

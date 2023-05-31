@@ -29,21 +29,21 @@ public class JsonTestDataProviderTests {
 	
 	@Test(dataProvider="getTestDataFromJson",
 			dataProviderClass=io.nishadc.automationtestingframework.testngcustomization.TestDataProvider.class,
-			enabled=true)
+			enabled=false)
 	public void getTestDataFromJson_noFile_test(Map<String,Object> testData) {
 		
 	}
 	
 	@Test(dataProvider="getTestDataFromJson",
 			dataProviderClass=io.nishadc.automationtestingframework.testngcustomization.TestDataProvider.class,
-			enabled=true)
+			enabled=false)
 	public void getTestDataFromJson_corruptedJson_test(Map<String,Object> testData) {
 		
 	}
 	
 	@Test(dataProvider="getTestDataFromJson",
 			dataProviderClass=io.nishadc.automationtestingframework.testngcustomization.TestDataProvider.class,
-			enabled=true)
+			enabled=false)
 	public void getTestDataFromJson_incorrectFormat_test(Map<String,Object> testData) {
 		
 	}

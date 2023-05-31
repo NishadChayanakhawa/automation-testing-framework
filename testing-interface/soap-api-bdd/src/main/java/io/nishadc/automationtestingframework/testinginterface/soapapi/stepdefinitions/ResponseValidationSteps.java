@@ -1,6 +1,6 @@
 package io.nishadc.automationtestingframework.testinginterface.soapapi.stepdefinitions;
 
-import javax.xml.soap.SOAPException;
+import jakarta.xml.soap.SOAPException;
 import javax.xml.xpath.XPathExpressionException;
 
 import org.testng.Assert;
