@@ -12,7 +12,7 @@
 	<description>TestNG Customization</description>
 
 	<properties>
-		<jacoco-instruction-coveredratio.minimum>0.91</jacoco-instruction-coveredratio.minimum>
+		<jacoco-instruction-coveredratio.minimum>0.92</jacoco-instruction-coveredratio.minimum>
 		<jacoco-branch-coveredratio.minimum>0.85</jacoco-branch-coveredratio.minimum>
 	</properties>
 

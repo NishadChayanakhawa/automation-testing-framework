@@ -12,6 +12,7 @@ import org.testng.xml.XmlSuite;
 import io.nishadc.automationtestingframework.testngcustomization.beans.TestExecutionResult;
 import io.nishadc.automationtestingframework.testngcustomization.beans.TestStatus;
 import io.nishadc.automationtestingframework.testngcustomization.process.HTMLReportGenerator;
+import io.nishadc.automationtestingframework.testngcustomization.process.RetryAnalyzer;
 import io.nishadc.automationtestingframework.logging.LoggerFactory;
 
 public class ReportGenerator implements ITestListener,IReporter {
@@ -85,6 +86,7 @@ public class ReportGenerator implements ITestListener,IReporter {
 	@Override
 	public void onTestSuccess(ITestResult result) {
 		ITestListener.super.onTestSuccess(result);
+		RetryAnalyzer.resetRetryCounter();
 		ReportGenerator.completeTest(result,TestStatus.PASS);
 	}
 	
