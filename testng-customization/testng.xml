@@ -3,6 +3,7 @@
 <suite name="TestNG Customizations Unit Tests">
 	<listeners>
 		<listener class-name="io.nishadc.automationtestingframework.testngcustomization.ReportGenerator"></listener>
+		<listener class-name="io.nishadc.automationtestingframework.testngcustomization.ExecutionController"></listener>
 	</listeners>
 	<test name="JSON Data Provider Unit Tests">
 		<classes>
@@ -34,6 +35,16 @@
 	<test name="HTML Report Generator Unit Tests">
 		<classes>
 			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.HTMLReportGeneratorTests" />
+		</classes>
+	</test>
+	<test name="Retry Analyzer Unit Tests">
+		<classes>
+			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.RetryAnalyzerTests" />
+		</classes>
+	</test>
+	<test name="Execution Control Unit Tests">
+		<classes>
+			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.TestExecutionControlTests" />
 		</classes>
 	</test>
 </suite>
