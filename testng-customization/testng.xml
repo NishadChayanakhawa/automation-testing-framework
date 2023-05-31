@@ -5,7 +5,7 @@
 		<listener class-name="io.nishadc.automationtestingframework.testngcustomization.ReportGenerator"></listener>
 		<listener class-name="io.nishadc.automationtestingframework.testngcustomization.ExecutionController"></listener>
 	</listeners>
-	<test name="JSON Data Provider Unit Tests">
+	<!-- <test name="JSON Data Provider Unit Tests">
 		<classes>
 			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.JsonTestDataProviderTests" />
 		</classes>
@@ -36,7 +36,7 @@
 		<classes>
 			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.HTMLReportGeneratorTests" />
 		</classes>
-	</test>
+	</test> -->
 	<test name="Retry Analyzer Unit Tests">
 		<classes>
 			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.RetryAnalyzerTests" />

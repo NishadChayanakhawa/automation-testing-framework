@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import java.util.List;
+import java.util.ArrayList;
 
 @JsonInclude(Include.NON_NULL)
 public class TestExecutionResult extends JsonPropertyBaseClass{
@@ -12,6 +13,7 @@ public class TestExecutionResult extends JsonPropertyBaseClass{
 
 	public TestExecutionResult() {
 		super();
+		this.testSets=new ArrayList<>();
 	}
 
 	public List<TestSet> getTestSets() {
