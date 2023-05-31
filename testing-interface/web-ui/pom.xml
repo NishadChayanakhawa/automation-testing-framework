@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>io.github.nishadchayanakhawa</groupId>
 		<artifactId>testing-interface</artifactId>
-		<version>1.0.1</version>
+		<version>1.1.0</version>
 	</parent>
 	<artifactId>web-ui</artifactId>
 	<name>Web UI</name>
@@ -18,7 +18,7 @@
 		</dependency>
 		<dependency>
 			<groupId>${project.groupId}</groupId>
-			<artifactId>testng-cutomization</artifactId>
+			<artifactId>testng-customization</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
