@@ -1,12 +1,8 @@
 package io.nishadc.automationtestingframework.testinginterface.restapi.unittests;
 
 import org.testng.annotations.Test;
-
-import dev.failsafe.internal.util.Assert;
-
 import java.util.Map;
 import java.util.HashMap;
-
 import org.assertj.core.api.Assertions;
 import org.json.JSONObject;
 import io.nishadc.automationtestingframework.testinginterface.restapi.RESTAPITestHelper;
