@@ -2,8 +2,7 @@ package io.nishadc.automationtestingframework.testinginterface.soapapi.stepdefin
 
 import java.util.Map;
 import java.util.HashMap;
-import javax.xml.soap.SOAPMessage;
-
+import jakarta.xml.soap.SOAPMessage;
 public class SOAPAPIComponents {
 	protected static ThreadLocal<Map<String, String>> headers=new ThreadLocal<>();
 	protected static ThreadLocal<String> soapActions=new ThreadLocal<>();

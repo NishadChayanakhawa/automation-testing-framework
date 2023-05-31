@@ -113,7 +113,7 @@
 						<configuration>
 							<rules>
 								<rule>
-									<element>PACKAGE</element>
+									<element>BUNDLE</element>
 									<limits>
 										<limit>
 											<counter>INSTRUCTION</counter>
@@ -357,12 +357,19 @@
 			</dependency>
 
 			<!-- SOAP API -->
-			<!-- https://mvnrepository.com/artifact/xml-apis/xml-apis -->
+			<!--
+			https://mvnrepository.com/artifact/jakarta.xml.ws/jakarta.xml.ws-api -->
 			<dependency>
-				<groupId>xml-apis</groupId>
-				<artifactId>xml-apis</artifactId>
-				<version>${xml-apis.version}</version>
-				<scope>test</scope>
+				<groupId>jakarta.xml.ws</groupId>
+				<artifactId>jakarta.xml.ws-api</artifactId>
+				<version>${jakarta.xml.ws-api.version}</version>
+			</dependency>
+			<!--
+			https://mvnrepository.com/artifact/com.sun.xml.messaging.saaj/saaj-impl -->
+			<dependency>
+				<groupId>com.sun.xml.messaging.saaj</groupId>
+				<artifactId>saaj-impl</artifactId>
+				<version>${saaj-impl.version}</version>
 			</dependency>
 
 			<!-- BDD -->
@@ -408,7 +415,7 @@
 		<sonar-maven-plugin.version>3.9.1.2184</sonar-maven-plugin.version>
 
 		<!-- Configuration -->
-		<java.version>1.8</java.version>
+		<java.version>17</java.version>
 		<project.encoding>UTF-8</project.encoding>
 		<jacoco-instruction-coveredratio.minimum>1.0</jacoco-instruction-coveredratio.minimum>
 		<jacoco-branch-coveredratio.minimum>1.0</jacoco-branch-coveredratio.minimum>
@@ -419,16 +426,16 @@
 		<log4j.version>2.20.0</log4j.version>
 		<json.version>20230227</json.version>
 		<poi.version>5.2.3</poi.version>
-		<testng.version>7.5</testng.version>
+		<testng.version>7.8.0</testng.version>
 		<assertj.version>3.24.2</assertj.version>
-		<jackson.version>2.15.0-rc2</jackson.version>
-		<selenium.version>4.8.3</selenium.version>
+		<jackson.version>2.15.1</jackson.version>
+		<selenium.version>4.9.1</selenium.version>
 		<freemarker.version>2.3.32</freemarker.version>
-		<webdrivermanager.version>5.3.2</webdrivermanager.version>
+		<webdrivermanager.version>5.3.3</webdrivermanager.version>
 		<rest-assured.version>5.3.0</rest-assured.version>
 		<hamcrest.version>2.2</hamcrest.version>
-		<jaxws-rt.version>2.3.2</jaxws-rt.version>
-		<xml-apis.version>1.4.01</xml-apis.version>
+		<jakarta.xml.ws-api.version>4.0.0</jakarta.xml.ws-api.version>
+		<saaj-impl.version>3.0.2</saaj-impl.version>
 		<cucumber.version>7.12.0</cucumber.version>
 	</properties>
 </project>

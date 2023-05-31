@@ -46,10 +46,18 @@
 			<artifactId>testng</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/xml-apis/xml-apis -->
+
+		<!--
+		https://mvnrepository.com/artifact/jakarta.xml.ws/jakarta.xml.ws-api -->
 		<dependency>
-			<groupId>xml-apis</groupId>
-			<artifactId>xml-apis</artifactId>
+			<groupId>jakarta.xml.ws</groupId>
+			<artifactId>jakarta.xml.ws-api</artifactId>
+		</dependency>
+		<!--
+		https://mvnrepository.com/artifact/com.sun.xml.messaging.saaj/saaj-impl -->
+		<dependency>
+			<groupId>com.sun.xml.messaging.saaj</groupId>
+			<artifactId>saaj-impl</artifactId>
 		</dependency>
 
 	</dependencies>

@@ -2,7 +2,6 @@ package io.nishadc.automationtestingframework.testngcustomization;
 
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Date;
@@ -128,19 +127,19 @@ public class TestFactory {
 			int totalTestsCount=testSet.getTests().size();
 			int passedTestsCount=testSet.getTests().stream()
 					.filter(test -> test.getStatus()==TestStatus.PASS)
-					.collect(Collectors.toList())
+					.toList()
 					.size();
 			int conditionallyPassedTestsCount=testSet.getTests().stream()
 					.filter(test -> test.getStatus()==TestStatus.CONDITIONAL_PASS)
-					.collect(Collectors.toList())
+					.toList()
 					.size();
 			int failedTestsCount=testSet.getTests().stream()
 					.filter(test -> test.getStatus()==TestStatus.FAIL || test.getStatus()==TestStatus.TIMEOUT)
-					.collect(Collectors.toList())
+					.toList()
 					.size();
 			int skippedTestsCount=testSet.getTests().stream()
 					.filter(test -> test.getStatus()==TestStatus.SKIP)
-					.collect(Collectors.toList())
+					.toList()
 					.size();
 			testSets.get(key).setTotalTests(totalTestsCount);
 			testSets.get(key).setPassedTests(passedTestsCount);
@@ -162,7 +161,7 @@ public class TestFactory {
 			testSets.get(key).setElapsedTime(TestFactory.getElapsedTime(minimumTimestamp, maximumTimestamp));
 		}
 		TestExecutionResult testExecutionResult=new TestExecutionResult();
-		testExecutionResult.setTestSets(testSets.values().stream().collect(Collectors.toList()));
+		testExecutionResult.setTestSets(testSets.values().stream().toList());
 		return testExecutionResult;
 	}
 	

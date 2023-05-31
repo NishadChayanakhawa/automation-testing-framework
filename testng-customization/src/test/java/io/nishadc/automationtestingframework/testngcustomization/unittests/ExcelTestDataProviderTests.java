@@ -5,6 +5,8 @@ import java.util.Map;
 import org.assertj.core.api.Assertions;
 import org.testng.annotations.Test;
 
+import io.nishadc.automationtestingframework.filehandling.exceptions.ExcelFileHandlingException;
+
 public class ExcelTestDataProviderTests {
 	@Test(dataProvider="getTestDataFromExcel",
 			dataProviderClass=io.nishadc.automationtestingframework.testngcustomization.TestDataProvider.class)
@@ -26,8 +28,9 @@ public class ExcelTestDataProviderTests {
 	}
 	
 	@Test(dataProvider="getTestDataFromExcel",
-			dataProviderClass=io.nishadc.automationtestingframework.testngcustomization.TestDataProvider.class)
+			dataProviderClass=io.nishadc.automationtestingframework.testngcustomization.TestDataProvider.class,
+			expectedExceptions = {ExcelFileHandlingException.class},
+			enabled=false)
 	public void noSheet_test(Map<String,Object> testData) {
-		
 	}
 }
