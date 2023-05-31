@@ -42,4 +42,9 @@
 			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.RetryAnalyzerTests" />
 		</classes>
 	</test>
+	<test name="Execution Control Unit Tests">
+		<classes>
+			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.TestExecutionControlTests" />
+		</classes>
+	</test>
 </suite>
