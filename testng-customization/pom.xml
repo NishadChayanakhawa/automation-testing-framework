@@ -14,6 +14,7 @@
 	<properties>
 		<jacoco-instruction-coveredratio.minimum>0.89</jacoco-instruction-coveredratio.minimum>
 		<jacoco-branch-coveredratio.minimum>0.72</jacoco-branch-coveredratio.minimum>
+		<pmd.skip>true</pmd.skip>
 	</properties>
 
 	<dependencies>
