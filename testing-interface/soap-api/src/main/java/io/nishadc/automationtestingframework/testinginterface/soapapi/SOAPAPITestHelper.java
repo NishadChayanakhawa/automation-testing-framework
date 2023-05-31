@@ -117,15 +117,15 @@ public class SOAPAPITestHelper {
 		SOAPAPITestHelper.logger.debug("Calling SOAP at endpoint url: {}", endpointUrl);
 		// Get SOAP Connection
 		SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
-		SOAPConnection soapConnection = soapConnectionFactory.createConnection();
+		try(SOAPConnection soapConnection = soapConnectionFactory.createConnection()) {
 		// Call SOAP service
-		SOAPMessage response = soapConnection.call(soapRequest, endpointUrl);
-		TestFactory.recordTestStep(String.format("Submitted SOAP request to %s", endpointUrl));
-		String responseXml = SOAPAPITestHelper.toXML(response);
-		SOAPAPITestHelper.logger.debug("Response : {}", responseXml);
-		TestFactory.recordTestStep(String.format("Response: <br><br><textarea>%s</textarea>", responseXml));
-		soapConnection.close();
-		return response;
+			SOAPMessage response = soapConnection.call(soapRequest, endpointUrl);
+			TestFactory.recordTestStep(String.format("Submitted SOAP request to %s", endpointUrl));
+			String responseXml = SOAPAPITestHelper.toXML(response);
+			SOAPAPITestHelper.logger.debug("Response : {}", responseXml);
+			TestFactory.recordTestStep(String.format("Response: <br><br><textarea>%s</textarea>", responseXml));
+			return response;
+		}
 	}
 
 	private static NamespaceContext getNamespaceContext(String namespacePrefix, String namespaceUri) {
