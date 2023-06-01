@@ -1,7 +1,7 @@
 package io.nishadc.automationtestingframework.testngcustomization.beans;
 
-import java.util.Date;
 import java.util.List;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -14,15 +14,16 @@ public class TestSet extends JsonPropertyBaseClass{
 	private String suiteName;
 	private String name;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="MM/dd/yyyy HH:mm:ss")
-	private Date startTimestamp;
+	private LocalDateTime startTimestamp;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="MM/dd/yyyy HH:mm:ss")
-	private Date endTimestamp;
+	private LocalDateTime endTimestamp;
 	private String elapsedTime;
 	private int totalTests;
 	private int passedTests;
 	private int conditionallyPassedTests;
 	private int failedTests;
 	private int skippedTests;
+	private String elapsedTimeForChart;
 	private List<TestCase> tests;
 	public TestSet() {
 		super();
@@ -45,16 +46,16 @@ public class TestSet extends JsonPropertyBaseClass{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getStartTimestamp() {
+	public LocalDateTime getStartTimestamp() {
 		return startTimestamp;
 	}
-	public void setStartTimestamp(Date startTimestamp) {
+	public void setStartTimestamp(LocalDateTime startTimestamp) {
 		this.startTimestamp = startTimestamp;
 	}
-	public Date getEndTimestamp() {
+	public LocalDateTime getEndTimestamp() {
 		return endTimestamp;
 	}
-	public void setEndTimestamp(Date endTimestamp) {
+	public void setEndTimestamp(LocalDateTime endTimestamp) {
 		this.endTimestamp = endTimestamp;
 	}
 	public String getElapsedTime() {
@@ -101,5 +102,11 @@ public class TestSet extends JsonPropertyBaseClass{
 	}
 	public void addTest(TestCase test) {
 		this.tests.add(test);
+	}
+	public String getElapsedTimeForChart() {
+		return elapsedTimeForChart;
+	}
+	public void setElapsedTimeForChart(String elapsedTimeForChart) {
+		this.elapsedTimeForChart = elapsedTimeForChart;
 	}
 }

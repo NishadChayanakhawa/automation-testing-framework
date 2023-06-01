@@ -1,5 +1,7 @@
 package io.nishadc.automationtestingframework.testngcustomization;
 
+import java.io.IOException;
+import java.nio.file.Paths;
 import java.util.List;
 import org.apache.logging.log4j.Logger;
 import org.testng.IReporter;
@@ -8,11 +10,14 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 import org.testng.xml.XmlSuite;
-
+import io.nishadc.automationtestingframework.testngcustomization.exceptions.ReportGenerationException;
 import io.nishadc.automationtestingframework.testngcustomization.beans.TestExecutionResult;
 import io.nishadc.automationtestingframework.testngcustomization.beans.TestStatus;
 import io.nishadc.automationtestingframework.testngcustomization.process.HTMLReportGenerator;
+import io.nishadc.automationtestingframework.testngcustomization.process.RetryAnalyzer;
 import io.nishadc.automationtestingframework.logging.LoggerFactory;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class ReportGenerator implements ITestListener,IReporter {
 	@Override
@@ -23,10 +28,20 @@ public class ReportGenerator implements ITestListener,IReporter {
 		TestExecutionResult testExecutionReport=TestFactory.getExecutionResult();
 		ReportGenerator.logger.debug("Test Results:\n{}",testExecutionReport);
 		
-		HTMLReportGenerator.generateHTMLReport("TestExecutionReportSampleTemplate_v1.0", testExecutionReport.toMap(),"TestExecutionReport");
+		ObjectMapper objectMapper=new ObjectMapper();
+		try {
+			objectMapper
+				.registerModule(new JavaTimeModule())
+				.writerWithDefaultPrettyPrinter()
+				.writeValue(Paths.get("./target/testResults.json").toFile(), testExecutionReport);
+		} catch (IOException e) {
+			throw (ReportGenerationException)new ReportGenerationException(e.getMessage()).initCause(e);
+		}
+		
+		HTMLReportGenerator.generateHTMLReport("TestExecutionReportSampleTemplate_v2.0", testExecutionReport.toMap(),"TestExecutionReport");
 		HTMLReportGenerator.generateHTMLReport("MailableSummaryTemplate_v1.0", testExecutionReport.toMap(),"MailableSummary");
 	}
-
+	
 	private static final Logger logger=LoggerFactory.create(ReportGenerator.class);
 	
 	private static String getTestSuiteName(ISuite suite) {
@@ -85,6 +100,7 @@ public class ReportGenerator implements ITestListener,IReporter {
 	@Override
 	public void onTestSuccess(ITestResult result) {
 		ITestListener.super.onTestSuccess(result);
+		RetryAnalyzer.resetRetryCounter();
 		ReportGenerator.completeTest(result,TestStatus.PASS);
 	}
 	

@@ -1,17 +1,19 @@
 package io.nishadc.automationtestingframework.testngcustomization.process;
 
-import java.util.Date;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class DateTimeHelper {
 	private DateTimeHelper() {
 		
 	}
 	
-	public static String getElapsedTime(Date startTimestamp,Date endTimestamp) {
-		long elapsedTime=endTimestamp.getTime()-startTimestamp.getTime();
-		long elapsedTimeInSeconds=elapsedTime/1000 % 60;
-		long elapsedTimeInMinutes=elapsedTime/(1000 * 60) % 60;
-		long elapsedTimeInHours=elapsedTime/(1000 * 60 * 60) % 24;
-		return String.format("%02d:%02d:%02d", elapsedTimeInHours,elapsedTimeInMinutes,elapsedTimeInSeconds);
+	public static String getElapsedTime(LocalDateTime startTimestamp,LocalDateTime endTimestamp) {
+		Duration elapsedDuration=Duration.between(startTimestamp, endTimestamp);
+		return DateTimeHelper.formatDuration(elapsedDuration);
+	}
+	
+	public static String formatDuration(Duration duration) {
+		return String.format("%02d:%02d:%02d", duration.toHours(),duration.toMinutesPart(),duration.toSecondsPart());
 	}
 }

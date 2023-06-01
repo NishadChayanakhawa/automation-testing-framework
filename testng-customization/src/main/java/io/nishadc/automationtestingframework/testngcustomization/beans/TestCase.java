@@ -1,10 +1,8 @@
 package io.nishadc.automationtestingframework.testngcustomization.beans;
 
-import java.util.Date;
 import java.util.List;
-
 import org.openqa.selenium.WebDriver;
-
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -22,9 +20,9 @@ public class TestCase extends JsonPropertyBaseClass{
 	private String testNGTestName;
 	private String name;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="MM/dd/yyyy HH:mm:ss")
-	private Date startTimestamp;
+	private LocalDateTime startTimestamp;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="MM/dd/yyyy HH:mm:ss")
-	private Date endTimestamp;
+	private LocalDateTime endTimestamp;
 	private String elapsedTime;
 	private TestStatus status;
 	private List<TestStep> testSteps;
@@ -33,7 +31,7 @@ public class TestCase extends JsonPropertyBaseClass{
 	private WebDriver driver;
 	public TestCase() {
 		super();
-		this.startTimestamp=new Date();
+		this.startTimestamp=LocalDateTime.now();
 		this.testSteps=new ArrayList<>();
 	}
 	public TestCase(String testNGSuiteName, String testNGTestName, String name) {
@@ -60,16 +58,16 @@ public class TestCase extends JsonPropertyBaseClass{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getStartTimestamp() {
+	public LocalDateTime getStartTimestamp() {
 		return startTimestamp;
 	}
-	public void setStartTimestamp(Date startTimestamp) {
+	public void setStartTimestamp(LocalDateTime startTimestamp) {
 		this.startTimestamp = startTimestamp;
 	}
-	public Date getEndTimestamp() {
+	public LocalDateTime getEndTimestamp() {
 		return endTimestamp;
 	}
-	public void setEndTimestamp(Date endTimestamp) {
+	public void setEndTimestamp(LocalDateTime endTimestamp) {
 		this.endTimestamp = endTimestamp;
 	}
 	public String getElapsedTime() {
@@ -117,7 +115,7 @@ public class TestCase extends JsonPropertyBaseClass{
 		this.testSteps.add(testStep);
 	}
 	public void endTest(TestStatus status) {
-		this.endTimestamp=new Date();
+		this.endTimestamp=LocalDateTime.now();
 		this.elapsedTime=DateTimeHelper.getElapsedTime(this.startTimestamp, this.endTimestamp);
 		this.status=status;
 	}
