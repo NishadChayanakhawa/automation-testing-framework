@@ -17,6 +17,7 @@ import io.nishadc.automationtestingframework.testngcustomization.process.HTMLRep
 import io.nishadc.automationtestingframework.testngcustomization.process.RetryAnalyzer;
 import io.nishadc.automationtestingframework.logging.LoggerFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class ReportGenerator implements ITestListener,IReporter {
 	@Override
@@ -30,13 +31,14 @@ public class ReportGenerator implements ITestListener,IReporter {
 		ObjectMapper objectMapper=new ObjectMapper();
 		try {
 			objectMapper
+				.registerModule(new JavaTimeModule())
 				.writerWithDefaultPrettyPrinter()
 				.writeValue(Paths.get("./target/testResults.json").toFile(), testExecutionReport);
 		} catch (IOException e) {
 			throw (ReportGenerationException)new ReportGenerationException(e.getMessage()).initCause(e);
 		}
 		
-		HTMLReportGenerator.generateHTMLReport("TestExecutionReportSampleTemplate_v1.0", testExecutionReport.toMap(),"TestExecutionReport");
+		HTMLReportGenerator.generateHTMLReport("TestExecutionReportSampleTemplate_v2.0", testExecutionReport.toMap(),"TestExecutionReport");
 		HTMLReportGenerator.generateHTMLReport("MailableSummaryTemplate_v1.0", testExecutionReport.toMap(),"MailableSummary");
 	}
 	
