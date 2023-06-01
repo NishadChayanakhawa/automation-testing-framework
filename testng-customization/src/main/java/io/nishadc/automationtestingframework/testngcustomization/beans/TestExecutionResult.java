@@ -15,7 +15,12 @@ public class TestExecutionResult extends JsonPropertyBaseClass{
 	private int conditionallyPassedTests;
 	private int failedTests;
 	private int skippedTests;
-
+	private String actualTime;
+	private String savedTime;
+	private String actualTimeText;
+	private String savedTimeText;
+	private String savingPercent;
+	
 	public TestExecutionResult() {
 		super();
 		this.testSets=new ArrayList<>();
@@ -67,5 +72,45 @@ public class TestExecutionResult extends JsonPropertyBaseClass{
 
 	public void setSkippedTests(int skippedTests) {
 		this.skippedTests = skippedTests;
+	}
+
+	public String getActualTime() {
+		return actualTime;
+	}
+
+	public void setActualTime(String actualTime) {
+		this.actualTime = actualTime;
+	}
+
+	public String getSavedTime() {
+		return savedTime;
+	}
+
+	public void setSavedTime(String savedTime) {
+		this.savedTime = savedTime;
+	}
+
+	public String getActualTimeText() {
+		return actualTimeText;
+	}
+
+	public void setActualTimeText(String actualTimeText) {
+		this.actualTimeText = actualTimeText;
+	}
+
+	public String getSavedTimeText() {
+		return savedTimeText;
+	}
+
+	public void setSavedTimeText(String savedTimeText) {
+		this.savedTimeText = savedTimeText;
+	}
+
+	public String getSavingPercent() {
+		return savingPercent;
+	}
+
+	public void setSavingPercent(String savingPercent) {
+		this.savingPercent = savingPercent;
 	}
 }

@@ -3,15 +3,16 @@ package io.nishadc.automationtestingframework.testngcustomization;
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
+import java.time.Duration;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
-
 import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import io.nishadc.automationtestingframework.testngcustomization.beans.TestCase;
 import io.nishadc.automationtestingframework.testngcustomization.beans.TestSet;
 import io.nishadc.automationtestingframework.testngcustomization.beans.TestExecutionResult;
 import io.nishadc.automationtestingframework.testngcustomization.beans.TestStatus;
+import io.nishadc.automationtestingframework.testngcustomization.process.DateTimeHelper;
 import io.nishadc.automationtestingframework.testngcustomization.process.ScreenshotHandling;
 import io.nishadc.automationtestingframework.logging.LoggerFactory;
 
@@ -148,17 +149,17 @@ public class TestFactory {
 			testSets.get(key).setSkippedTests(skippedTestsCount);
 			
 			//timestamps
-			Date minimumTimestamp=testSet.getTests().stream()
+			LocalDateTime minimumTimestamp=testSet.getTests().stream()
 					.map(TestCase :: getStartTimestamp)
-					.min(Date::compareTo)
-					.orElse(new Date());
-			Date maximumTimestamp=testSet.getTests().stream()
+					.min(LocalDateTime::compareTo)
+					.orElse(LocalDateTime.now());
+			LocalDateTime maximumTimestamp=testSet.getTests().stream()
 					.map(TestCase :: getEndTimestamp)
-					.max(Date::compareTo)
-					.orElse(new Date());
+					.max(LocalDateTime::compareTo)
+					.orElse(LocalDateTime.now());
 			testSets.get(key).setStartTimestamp(minimumTimestamp);
 			testSets.get(key).setEndTimestamp(maximumTimestamp);
-			testSets.get(key).setElapsedTime(TestFactory.getElapsedTime(minimumTimestamp, maximumTimestamp));
+			testSets.get(key).setElapsedTime(DateTimeHelper.getElapsedTime(minimumTimestamp, maximumTimestamp));
 		}
 		TestExecutionResult testExecutionResult=new TestExecutionResult();
 		testExecutionResult.setTestSets(testSets.values().stream().toList());
@@ -175,14 +176,34 @@ public class TestFactory {
 		testExecutionResult.setSkippedTests(testExecutionResult.getTestSets().stream()
 				.mapToInt(TestSet::getSkippedTests).sum());
 		
+		List<TestCase> allTests=TestFactory.getCompletedTests();
+		Duration seriesDuration=Duration.ZERO;
+		for(TestCase testCase : allTests) {
+			Duration elapsedTime=Duration.between(testCase.getStartTimestamp(), testCase.getEndTimestamp());
+			seriesDuration=seriesDuration.plus(elapsedTime);
+		}
+		
+		LocalDateTime minimumStartTimestamp=allTests.stream()
+				.map(TestCase :: getStartTimestamp)
+				.min(LocalDateTime::compareTo)
+				.orElse(LocalDateTime.now());
+		LocalDateTime maximumEndTimestamp=allTests.stream()
+				.map(TestCase :: getEndTimestamp)
+				.max(LocalDateTime::compareTo)
+				.orElse(LocalDateTime.now());
+		Duration actualDuration=Duration.between(minimumStartTimestamp, maximumEndTimestamp);
+		
+		long seriesDurationMillis=seriesDuration.toMillis();
+		long normalizedSeriesDurationMillis=(long) (seriesDurationMillis*1.525201613);
+		long actualDurationMillis=actualDuration.toMillis();
+		long savedDurationMillis=normalizedSeriesDurationMillis>actualDurationMillis?(normalizedSeriesDurationMillis - actualDurationMillis):0;
+		float savingPercent=((float)savedDurationMillis/normalizedSeriesDurationMillis)*100;
+		
+		testExecutionResult.setActualTime(String.format("%d", actualDurationMillis));
+		testExecutionResult.setActualTimeText(DateTimeHelper.formatDuration(actualDuration));
+		testExecutionResult.setSavedTime(String.format("%d", savedDurationMillis));
+		testExecutionResult.setSavedTimeText(DateTimeHelper.formatDuration(Duration.ofMillis(savedDurationMillis)));
+		testExecutionResult.setSavingPercent(String.format("%.1f", savingPercent));
 		return testExecutionResult;
-	}
-	
-	protected static String getElapsedTime(Date startTimestamp,Date endTimestamp) {
-		long elapsedTime=endTimestamp.getTime()-startTimestamp.getTime();
-		long elapsedTimeInSeconds=elapsedTime/1000 % 60;
-		long elapsedTimeInMinutes=elapsedTime/(1000 * 60) % 60;
-		long elapsedTimeInHours=elapsedTime/(1000 * 60 * 60) % 24;
-		return String.format("%02d:%02d:%02d", elapsedTimeInHours,elapsedTimeInMinutes,elapsedTimeInSeconds);
 	}
 }

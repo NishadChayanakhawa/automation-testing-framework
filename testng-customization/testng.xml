@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="TestNG Customizations Unit Tests" parallel="tests" thread-count="1">
+<suite name="TestNG Customizations Unit Tests" parallel="tests" thread-count="3">
 	<listeners>
 		<listener class-name="io.nishadc.automationtestingframework.testngcustomization.ReportGenerator"></listener>
 		<listener class-name="io.nishadc.automationtestingframework.testngcustomization.ExecutionController"></listener>
@@ -57,7 +57,7 @@
 			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.ParallelTestExecution2" />
 		</classes>
 	</test>
-	<test name="Parallel3 Unit Tests" parallel="methods" thread-count="1">
+	<test name="Parallel3 Unit Tests" parallel="methods" thread-count="5">
 		<classes>
 			<class name="io.nishadc.automationtestingframework.testngcustomization.unittests.ParallelTestExecution3" />
 		</classes>

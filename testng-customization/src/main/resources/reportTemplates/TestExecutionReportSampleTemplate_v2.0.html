@@ -141,6 +141,8 @@
 				type: 'pie',
 				data: countSummaryData,
 				options: {
+					responsive: true,
+					maintainAspectRatio : false,
 					plugins : {
 						title : {
 							display : true,
@@ -152,6 +154,45 @@
 
 			const countSummaryChart = document.getElementById("testCountSummary");
 			new Chart(countSummaryChart, countSummaryConfig);
+			
+			//Generate Saving Summary
+			const savingSummaryData = {
+				labels: ["Time Saved","Actual Execution Time"],
+				datasets: [
+					{
+						data: [${savedTime},${actualTime}],
+						backgroundColor : ['lightgray','green'],
+						hoverOffset : 4,
+					}
+				]
+			};
+
+			const savingDataDisplay=["${savedTimeText}","${actualTimeText}"];
+
+			const savingSummaryConfig = {
+				type: 'pie',
+				data: savingSummaryData,
+				options: {
+					responsive: true,
+					maintainAspectRatio : false,
+					plugins : {
+						title : {
+							display : true,
+							text : 'Parallel Execution Time Saving - ${savingPercent}%'
+						},
+						tooltip: {
+							callbacks: {
+								label: function (context) {
+									return savingDataDisplay[context.dataIndex];
+								}
+							}
+						}
+					},
+				},
+			};
+
+			const savingSummaryChart = document.getElementById("savingSummary");
+			new Chart(savingSummaryChart, savingSummaryConfig);
 		});
 	</script>
 </head>
@@ -208,6 +249,14 @@
 			
 			<div class="w3-border w3-third" style="height:400px;">
 				<canvas id="testCountSummary"></canvas>
+			</div>
+			
+			<div class="w3-border w3-third" style="height:400px;">
+				<canvas id="savingSummary"></canvas>
+			</div>
+			
+			<div class="w3-border w3-third" style="height:400px;">
+				<canvas id="executionTimeSummary"></canvas>
 			</div>
 			
 		</div>
