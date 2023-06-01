@@ -162,6 +162,19 @@ public class TestFactory {
 		}
 		TestExecutionResult testExecutionResult=new TestExecutionResult();
 		testExecutionResult.setTestSets(testSets.values().stream().toList());
+		
+		//populate test counts
+		testExecutionResult.setTotalTests(testExecutionResult.getTestSets().stream()
+											.mapToInt(TestSet::getTotalTests).sum());
+		testExecutionResult.setPassedTests(testExecutionResult.getTestSets().stream()
+				.mapToInt(TestSet::getPassedTests).sum());
+		testExecutionResult.setFailedTests(testExecutionResult.getTestSets().stream()
+				.mapToInt(TestSet::getFailedTests).sum());
+		testExecutionResult.setConditionallyPassedTests(testExecutionResult.getTestSets().stream()
+				.mapToInt(TestSet::getConditionallyPassedTests).sum());
+		testExecutionResult.setSkippedTests(testExecutionResult.getTestSets().stream()
+				.mapToInt(TestSet::getSkippedTests).sum());
+		
 		return testExecutionResult;
 	}
 	

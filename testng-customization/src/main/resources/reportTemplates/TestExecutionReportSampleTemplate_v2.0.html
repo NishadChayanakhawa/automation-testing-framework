@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Test Execution Report</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
+	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-win8.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$("button#openSidebar").click(function() {
+				$("div#main").css('margin-left','25%');
+				$("div#sidebar").show();
+			});
+			$("button#closeSidebar").click(function() {
+				$("div#sidebar").hide();
+				$("div#main").css('margin-left','0%');
+			});
+			$("a.sidebarMenuItem").click(function() {
+				$("a.sidebarMenuItem").removeClass("w3-win8-cobalt");
+				$(this).addClass("w3-win8-cobalt");
+				var sidebarMenuItemId=$(this).attr("id");
+				var mainContentId="mainContent_" + sidebarMenuItemId.substring(0,sidebarMenuItemId.length-8);
+				$("div[id^='mainContent_']").hide();
+				$("div#" + mainContentId).show();
+				$("span#contentName").html($(this).html());
+			});
+			$("li.testCase").dblclick(function() {
+				$(this).toggleClass("w3-light-gray");
+				$(this).children("ul").slideToggle();
+			});
+			$("a.screenshotButton").click(function() {
+				var base64Screenshot=$(this).siblings("span.screenshotData").text();
+				$("img#imageModal").attr('src',base64Screenshot);
+				$("div#imageViewer").show();
+			});
+			
+			//Generate Summary Graph
+			const executionSummaryData = {
+				labels: [<#list testSets as testSet>"${testSet.name}",</#list>],
+				datasets: [
+					{
+						type: 'line',
+						label: 'Pass %',
+						data: [<#list testSets as testSet>${((testSet.passedTests/testSet.totalTests)*100)?int},</#list>],
+						borderColor: 'black',
+						backgroundColor: 'orange',
+						borderDash: [5,5],
+						yAxisID : 'y1',
+					},
+					{
+						type : 'bar',
+						label: 'Total Tests',
+						data: [<#list testSets as testSet>${testSet.totalTests},</#list>],
+						backgroundColor: 'lightblue',
+						yAxisID : 'y',
+					},
+					{
+						type : 'bar',
+						label: 'Passed Tests',
+						data: [<#list testSets as testSet>${testSet.passedTests},</#list>],
+						backgroundColor: 'lightgreen',
+						yAxisID : 'y',
+					}
+				]
+			};
+
+			const executionSummaryConfig = {
+				type: 'line',
+				data: executionSummaryData,
+				options: {
+					responsive: true,
+					maintainAspectRatio : false,
+					interaction : {
+						mode : 'index',
+						intersect : 'false'
+					},
+					stacked : false,
+					plugins : {
+						title : {
+							display : true,
+							text : 'Test Execution Result Summary'
+						}
+					},
+					scales : {
+						y : {
+							type : 'linear',
+							display : true,
+							position : 'left',
+							title : {
+								display : true,
+								text : 'Test Count'
+							}
+						},
+						y1 : {
+							type : 'linear',
+							display : true,
+							position : 'right',
+							grid : {
+								drawOnChartArea : false
+							},
+							min : 0,
+							max : 110,
+							ticks : {
+								callback : function(value,index,ticks) {
+									if(value=="110") {
+										return "";
+									} else {
+										return value + "%";
+									}
+								}
+							},
+							title : {
+								display : true,
+								text : 'Pass %'
+							}
+						}
+					}
+				},
+			};
+
+			const executionSummaryChart = document.getElementById("testResultSummary");
+			new Chart(executionSummaryChart, executionSummaryConfig);
+			
+			//Generate Count Graph
+			const countSummaryData = {
+				labels: ["Passed Tests","Conditionally Passed Tests","Skipped Tests","Failed Tests"],
+				datasets: [
+					{
+						data: [${passedTests},${conditionallyPassedTests},${skippedTests},${failedTests}],
+						backgroundColor : ['green','lightgreen','orange','red'],
+						hoverOffset : 4,
+					}
+				]
+			};
+
+			const countSummaryConfig = {
+				type: 'pie',
+				data: countSummaryData,
+				options: {
+					plugins : {
+						title : {
+							display : true,
+							text : 'Test Summary'
+						}
+					},
+				},
+			};
+
+			const countSummaryChart = document.getElementById("testCountSummary");
+			new Chart(countSummaryChart, countSummaryConfig);
+		});
+	</script>
+</head>
+
+<body>
+	<!-- Image Viewer -->
+	<div id="imageViewer" class="w3-modal">
+		<div class="w3-modal-content">
+			<div class="w3-container">
+				<span class="w3-button w3-display-topright"
+					onclick="document.getElementById('imageViewer').style.display='none'">&times;</span>
+				<img id="imageModal" class="w3-image" alt="Screenshot" />
+			</div>
+		</div>
+	</div>
+
+	<!-- Sidebar -->
+	<div id="sidebar" class="w3-sidebar w3-bar-block w3-card w3-animate-left w3-tiny" style="display:none;width:25%;">
+		<button id="closeSidebar" class="w3-bar-item w3-button w3-large">Close &times;</button>
+		<a href="#" id="dashboardMenuItem" class="w3-bar-item w3-button sidebarMenuItem">Dashboard</a>
+		<a href="#" id="summaryMenuItem" class="w3-bar-item w3-button sidebarMenuItem">Summary</a>
+		<#list testSets as testSet>
+			<a href="#" id="testSetGroup${testSet?index}MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			${testSet.name}
+			<#if testSet.passedTests != 0>
+			<span class="w3-badge w3-tiny w3-win8-emerald">${testSet.passedTests}</span>
+			</#if>
+			<#if testSet.conditionallyPassedTests != 0>
+			<span class="w3-badge w3-tiny w3-win8-orange">${testSet.conditionallyPassedTests}</span>
+			</#if>
+			<#if testSet.failedTests != 0>
+			<span class="w3-badge w3-tiny w3-win8-crimson">${testSet.failedTests}</span>
+			</#if>
+			<#if testSet.skippedTests != 0>
+			<span class="w3-badge w3-tiny w3-win8-amber">${testSet.skippedTests}</span>
+			</#if>
+		</a>
+		</#list>
+	</div>
+
+	<!-- Main Pane -->
+	<div id="main">
+		<div class="w3-display-container w3-win8-cobalt">
+			<button id="openSidebar" class="w3-button w3-xlarge">&#9776;</button>
+			<span>Test Execution Report - <span id="contentName">Dashboard</span></span>
+			<span class="w3-display-right w3-tag w3-round w3-win8-mauve w3-tiny">04/04/2023 11:22:16</span>
+		</div>
+		<br />
+		<div id="mainContent_dashboard" class="w3-container">
+			
+			<div class="w3-border w3-row" style="height:400px;">
+				<canvas id="testResultSummary"></canvas>
+			</div>
+			
+			<div class="w3-border w3-third" style="height:400px;">
+				<canvas id="testCountSummary"></canvas>
+			</div>
+			
+		</div>
+		<div id="mainContent_summary" class="w3-container" style="display:none;">
+			<table class="w3-table w3-tiny">
+				<caption>Test Result Summary</caption>
+				<thead class="w3-win8-cobalt">
+					<th>Test Suite Name</th>
+					<th>Test Name</th>
+					<th style="text-align:center;">Total Tests</th>
+					<th style="text-align:center;">Passed Tests</th>
+					<th style="text-align:center;">Conditionally Passed Tests</th>
+					<th style="text-align:center;">Failed Tests</th>
+					<th style="text-align:center;">Skipped Tests</th>
+					<th style="text-align:center;">Start Timestamp</th>
+					<th style="text-align:center;">End Timestamp</th>
+					<th style="text-align:center;">Elapsed Time</th>
+				</thead>
+				<tbody>
+					<#list testSets as testSet>
+						<#if testSet.passedTests == 0>
+					<tr class="w3-win8-crimson">
+						<#elseif testSet.failedTests != 0>
+					<tr class="w3-pale-red">
+						<#else>
+					<tr class="w3-pale-green">							
+						</#if>
+						<td>${testSet.suiteName}</td>
+						<td>${testSet.name}</td>
+						<td style="text-align:center;">${testSet.totalTests}</td>
+						<td style="text-align:center;">${testSet.passedTests}</td style="text-align:center;">
+						<td style="text-align:center;">${testSet.conditionallyPassedTests}</td style="text-align:center;">
+						<td style="text-align:center;">${testSet.failedTests}</td style="text-align:center;">
+						<td style="text-align:center;">${testSet.skippedTests}</td style="text-align:center;">
+						<td style="text-align:center;">${testSet.startTimestamp}</td>
+						<td style="text-align:center;">${testSet.endTimestamp}</td>
+						<td style="text-align:center;">${testSet.elapsedTime}</td style="text-align:center;">
+					</tr>
+					</#list>
+				</tbody>
+			</table>
+		</div>
+		
+		<#list testSets as testSet>
+		<div id="mainContent_testSetGroup${testSet?index}" class="w3-container" style="display:none;">
+			<ul class="w3-ul w3-small">
+			<#list testSet.tests as test>
+				<li class="testCase">
+					<div class="testDetailWrapper w3-button w3-block w3-left-align">
+						<span class="w3-tiny">${testSet.suiteName} - ${testSet.name}</span><br />
+						<span><b>${test.name}</b></span><br />
+						<#if test.status == "PASS">
+						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
+						<#elseif test.status == "SKIP">
+						<span class="w3-tag w3-round w3-tiny w3-win8-amber">Skip</span>
+						<#elseif test.status == "FAIL">
+						<span class="w3-tag w3-round w3-tiny w3-win8-crimson">Fail</span> 
+						<#elseif test.status == "TIMEOUT">
+						<span class="w3-tag w3-round w3-tiny w3-win8-crimson">Time Out</span>
+						<#elseif test.status == "CONDITIONAL_PASS">
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">Pass <i class="fa fa-warning w3-small"></i></span>
+						<#else>
+						<span class="w3-tag w3-round w3-tiny w3-win8-steel">Unknown</span>
+						</#if> 
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">${test.startTimestamp}</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">${test.endTimestamp}</span> 
+						<span class="w3-tag w3-round w3-tiny w3-win8-steel">${test.elapsedTime}</span>
+					</div>
+					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
+						<#list test.testSteps as testStep>
+						<li>
+							<span class="w3-tag w3-round w3-win8-mauve">${testStep.timestamp}</span>
+							<#if testStep.status=="INFO">
+							<i class="fa fa-info-circle w3-small" style="color:darkblue;"></i>
+							<#elseif testStep.status=="WARNING">
+							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
+							<#elseif testStep.status=="FAIL">
+							<i class="fa fa fa-times-circle w3-small" style="color:crimson"></i>
+							</#if>
+							<span>${testStep.stepText!""}</span>
+							<#if testStep.uncompressedBase64Screenshot??>
+							<a class="screenshotButton">
+								<i class="fa fa-camera w3-small" style="cursor: pointer;"></i>
+							</a>
+							<span class="screenshotData" style="display: none;">
+								data:image/jpeg;base64,${testStep.uncompressedBase64Screenshot}
+							</span>
+							</#if>
+						</li>
+						</#list>
+					</ul>
+				</li>
+			</#list>	
+			</ul>
+		</div>
+		</#list>
+	</div>
+</body>
+</html>

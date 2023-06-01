@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class TestExecutionResult extends JsonPropertyBaseClass{
 	@JsonProperty
 	private List<TestSet> testSets;
+	private int totalTests;
+	private int passedTests;
+	private int conditionallyPassedTests;
+	private int failedTests;
+	private int skippedTests;
 
 	public TestExecutionResult() {
 		super();
@@ -22,5 +27,45 @@ public class TestExecutionResult extends JsonPropertyBaseClass{
 
 	public void setTestSets(List<TestSet> testSets) {
 		this.testSets = testSets;
+	}
+
+	public int getTotalTests() {
+		return totalTests;
+	}
+
+	public void setTotalTests(int totalTests) {
+		this.totalTests = totalTests;
+	}
+
+	public int getPassedTests() {
+		return passedTests;
+	}
+
+	public void setPassedTests(int passedTests) {
+		this.passedTests = passedTests;
+	}
+
+	public int getConditionallyPassedTests() {
+		return conditionallyPassedTests;
+	}
+
+	public void setConditionallyPassedTests(int conditionallyPassedTests) {
+		this.conditionallyPassedTests = conditionallyPassedTests;
+	}
+
+	public int getFailedTests() {
+		return failedTests;
+	}
+
+	public void setFailedTests(int failedTests) {
+		this.failedTests = failedTests;
+	}
+
+	public int getSkippedTests() {
+		return skippedTests;
+	}
+
+	public void setSkippedTests(int skippedTests) {
+		this.skippedTests = skippedTests;
 	}
 }
