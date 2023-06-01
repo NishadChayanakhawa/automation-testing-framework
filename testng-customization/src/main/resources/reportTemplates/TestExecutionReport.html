@@ -7,64 +7,63 @@
 	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
 	<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-colors-win8.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js"
-		integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
 	<script>
-		$(document).ready(function () {
-			$("button#openSidebar").click(function () {
-				$("div#main").css('margin-left', '25%');
+		$(document).ready(function() {
+			$("button#openSidebar").click(function() {
+				$("div#main").css('margin-left','25%');
 				$("div#sidebar").show();
 			});
-			$("button#closeSidebar").click(function () {
+			$("button#closeSidebar").click(function() {
 				$("div#sidebar").hide();
-				$("div#main").css('margin-left', '0%');
+				$("div#main").css('margin-left','0%');
 			});
-			$("a.sidebarMenuItem").click(function () {
+			$("a.sidebarMenuItem").click(function() {
 				$("a.sidebarMenuItem").removeClass("w3-win8-cobalt");
 				$(this).addClass("w3-win8-cobalt");
-				var sidebarMenuItemId = $(this).attr("id");
-				var mainContentId = "mainContent_" + sidebarMenuItemId.substring(0, sidebarMenuItemId.length - 8);
+				var sidebarMenuItemId=$(this).attr("id");
+				var mainContentId="mainContent_" + sidebarMenuItemId.substring(0,sidebarMenuItemId.length-8);
 				$("div[id^='mainContent_']").hide();
 				$("div#" + mainContentId).show();
 				$("span#contentName").html($(this).html());
 			});
-			$("li.testCase").dblclick(function () {
+			$("li.testCase").dblclick(function() {
 				$(this).toggleClass("w3-light-gray");
 				$(this).children("ul").slideToggle();
 			});
-			$("a.screenshotButton").click(function () {
-				var base64Screenshot = $(this).siblings("span.screenshotData").text();
-				$("img#imageModal").attr('src', base64Screenshot);
+			$("a.screenshotButton").click(function() {
+				var base64Screenshot=$(this).siblings("span.screenshotData").text();
+				$("img#imageModal").attr('src',base64Screenshot);
 				$("div#imageViewer").show();
 			});
-
+			
 			//Generate Summary Graph
 			const executionSummaryData = {
-				labels: ["Parallel2 Unit Tests", "Report - Screenshot Unit Tests", "Excel Data Provider Unit Tests", "Parallel3 Unit Tests", "Retry Analyzer Unit Tests", "Parallel1 Unit Tests", "Report - Test Status Unit Tests", "JSON Data Provider Unit Tests", "Report - HTML Report Unit Tests", "HTML Report Generator Unit Tests", "Execution Control Unit Tests",],
+				labels: ["Parallel2 Unit Tests","Report - Screenshot Unit Tests","Excel Data Provider Unit Tests","Parallel3 Unit Tests","Retry Analyzer Unit Tests","Parallel1 Unit Tests","JSON Data Provider Unit Tests","Report - Test Status Unit Tests","Report - HTML Report Unit Tests","HTML Report Generator Unit Tests","Execution Control Unit Tests",],
 				datasets: [
 					{
 						type: 'line',
 						label: 'Pass %',
-						data: [100, 75, 100, 100, 50, 100, 80, 100, 100, 100, 100,],
+						data: [100,75,100,100,50,100,100,80,100,100,100,],
 						borderColor: 'black',
 						backgroundColor: 'orange',
-						borderDash: [5, 5],
-						yAxisID: 'y1',
+						borderDash: [5,5],
+						yAxisID : 'y1',
 					},
 					{
-						type: 'bar',
+						type : 'bar',
 						label: 'Total Tests',
-						data: [5, 8, 4, 3, 8, 5, 5, 3, 2, 1, 4,],
+						data: [5,8,4,2,8,5,3,5,2,1,4,],
 						backgroundColor: 'lightblue',
-						yAxisID: 'y',
+						yAxisID : 'y',
 					},
 					{
-						type: 'bar',
+						type : 'bar',
 						label: 'Passed Tests',
-						data: [5, 6, 4, 3, 4, 5, 4, 3, 2, 1, 4,],
+						data: [5,6,4,2,4,5,3,4,2,1,4,],
 						backgroundColor: 'lightgreen',
-						yAxisID: 'y',
+						yAxisID : 'y',
 					}
 				]
 			};
@@ -74,49 +73,49 @@
 				data: executionSummaryData,
 				options: {
 					responsive: true,
-					maintainAspectRatio: false,
-					interaction: {
-						mode: 'index',
-						intersect: 'false'
+					maintainAspectRatio : false,
+					interaction : {
+						mode : 'index',
+						intersect : 'false'
 					},
-					stacked: false,
-					plugins: {
-						title: {
-							display: true,
-							text: 'Test Execution Result Summary'
+					stacked : false,
+					plugins : {
+						title : {
+							display : true,
+							text : 'Test Execution Result Summary'
 						}
 					},
-					scales: {
-						y: {
-							type: 'linear',
-							display: true,
-							position: 'left',
-							title: {
-								display: true,
-								text: 'Test Count'
+					scales : {
+						y : {
+							type : 'linear',
+							display : true,
+							position : 'left',
+							title : {
+								display : true,
+								text : 'Test Count'
 							}
 						},
-						y1: {
-							type: 'linear',
-							display: true,
-							position: 'right',
-							grid: {
-								drawOnChartArea: false
+						y1 : {
+							type : 'linear',
+							display : true,
+							position : 'right',
+							grid : {
+								drawOnChartArea : false
 							},
-							min: 0,
-							max: 110,
-							ticks: {
-								callback: function (value, index, ticks) {
-									if (value == "110") {
+							min : 0,
+							max : 110,
+							ticks : {
+								callback : function(value,index,ticks) {
+									if(value=="110") {
 										return "";
 									} else {
 										return value + "%";
 									}
 								}
 							},
-							title: {
-								display: true,
-								text: 'Pass %'
+							title : {
+								display : true,
+								text : 'Pass %'
 							}
 						}
 					}
@@ -125,15 +124,15 @@
 
 			const executionSummaryChart = document.getElementById("testResultSummary");
 			new Chart(executionSummaryChart, executionSummaryConfig);
-
+			
 			//Generate Count Graph
 			const countSummaryData = {
-				labels: ["Passed Tests", "Conditionally Passed Tests", "Skipped Tests", "Failed Tests"],
+				labels: ["Passed Tests","Conditionally Passed Tests","Skipped Tests","Failed Tests"],
 				datasets: [
 					{
-						data: [41, 3, 4, 0],
-						backgroundColor: ['green', 'lightgreen', 'orange', 'red'],
-						hoverOffset: 4,
+						data: [40,3,4,0],
+						backgroundColor : ['green','lightgreen','orange','red'],
+						hoverOffset : 4,
 					}
 				]
 			};
@@ -143,58 +142,96 @@
 				data: countSummaryData,
 				options: {
 					responsive: true,
-					maintainAspectRatio: false,
-					plugins: {
-						title: {
-							display: true,
-							text: 'Test Summary'
-						},
+					maintainAspectRatio : false,
+					plugins : {
+						title : {
+							display : true,
+							text : 'Test Summary'
+						}
 					},
 				},
 			};
 
 			const countSummaryChart = document.getElementById("testCountSummary");
 			new Chart(countSummaryChart, countSummaryConfig);
-
+			
 			//Generate Saving Summary
 			const savingSummaryData = {
-				labels: ["Time Saved", "Actual Execution Time"],
+				labels: ["Time Saved","Actual Execution Time"],
 				datasets: [
 					{
-						data: [27114, 17420],
-						backgroundColor: ['lightgray', 'green'],
-						hoverOffset: 4,
+						data: [23851,17250],
+						backgroundColor : ['lightgray','green'],
+						hoverOffset : 4,
 					}
 				]
 			};
 
-			const savingDataDisplay=["Saved","Actual"];
+			const savingDataDisplay=["00:00:23","00:00:17"];
 
 			const savingSummaryConfig = {
 				type: 'pie',
 				data: savingSummaryData,
 				options: {
 					responsive: true,
-					maintainAspectRatio: false,
-					plugins: {
-						title: {
-							display: true,
-							text: 'Parallel Execution Time Saving - 60.9%'
+					maintainAspectRatio : false,
+					plugins : {
+						title : {
+							display : true,
+							text : 'Parallel Execution Time Saving - 58.0%'
 						},
 						tooltip: {
 							callbacks: {
 								label: function (context) {
-									console.debug(context);
 									return savingDataDisplay[context.dataIndex];
 								}
 							}
 						}
-					}
+					},
 				},
 			};
 
 			const savingSummaryChart = document.getElementById("savingSummary");
 			new Chart(savingSummaryChart, savingSummaryConfig);
+			
+			//Generate Saving Summary
+			const executionTimeDistributionData = {
+				labels: ["TS1","TS2","TS3","TS4","TS5"],
+				datasets: [
+					{
+						label : 'Execution Time',
+						data: [5,10,15,20,25],
+						fill : true,
+					}
+				]
+			};
+
+			const executionTimeDistributionDisplay=["00:00:23","00:00:17","00:00:11","00:00:12","00:00:13"];
+
+			const executionTimeDistributionConfig = {
+				type: 'radar',
+				data: executionTimeDistributionData,
+				options: {
+					responsive: true,
+					maintainAspectRatio : false,
+					plugins : {
+						title : {
+							display : true,
+							text : 'Execution Time Distribution'
+						},
+						tooltip: {
+							callbacks: {
+								label: function (context) {
+									return executionTimeDistributionDisplay[context.dataIndex];
+								}
+							}
+						}
+					},
+				},
+			};
+
+			const executionTimeDistributionChart = document.getElementById("executionTimeDistribution");
+			new Chart(executionTimeDistributionChart, executionTimeDistributionConfig);
 		});
 	</script>
 </head>
@@ -216,50 +253,50 @@
 		<button id="closeSidebar" class="w3-bar-item w3-button w3-large">Close &times;</button>
 		<a href="#" id="dashboardMenuItem" class="w3-bar-item w3-button sidebarMenuItem">Dashboard</a>
 		<a href="#" id="summaryMenuItem" class="w3-bar-item w3-button sidebarMenuItem">Summary</a>
-		<a href="#" id="testSetGroup0MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			<a href="#" id="testSetGroup0MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
 			Parallel2 Unit Tests
 			<span class="w3-badge w3-tiny w3-win8-emerald">5</span>
 		</a>
-		<a href="#" id="testSetGroup1MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			<a href="#" id="testSetGroup1MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
 			Report - Screenshot Unit Tests
 			<span class="w3-badge w3-tiny w3-win8-emerald">6</span>
 			<span class="w3-badge w3-tiny w3-win8-orange">2</span>
 		</a>
-		<a href="#" id="testSetGroup2MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			<a href="#" id="testSetGroup2MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
 			Excel Data Provider Unit Tests
 			<span class="w3-badge w3-tiny w3-win8-emerald">4</span>
 		</a>
-		<a href="#" id="testSetGroup3MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			<a href="#" id="testSetGroup3MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
 			Parallel3 Unit Tests
-			<span class="w3-badge w3-tiny w3-win8-emerald">3</span>
+			<span class="w3-badge w3-tiny w3-win8-emerald">2</span>
 		</a>
-		<a href="#" id="testSetGroup4MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			<a href="#" id="testSetGroup4MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
 			Retry Analyzer Unit Tests
 			<span class="w3-badge w3-tiny w3-win8-emerald">4</span>
 			<span class="w3-badge w3-tiny w3-win8-amber">4</span>
 		</a>
-		<a href="#" id="testSetGroup5MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			<a href="#" id="testSetGroup5MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
 			Parallel1 Unit Tests
 			<span class="w3-badge w3-tiny w3-win8-emerald">5</span>
 		</a>
-		<a href="#" id="testSetGroup6MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			<a href="#" id="testSetGroup6MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			JSON Data Provider Unit Tests
+			<span class="w3-badge w3-tiny w3-win8-emerald">3</span>
+		</a>
+			<a href="#" id="testSetGroup7MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
 			Report - Test Status Unit Tests
 			<span class="w3-badge w3-tiny w3-win8-emerald">4</span>
 			<span class="w3-badge w3-tiny w3-win8-orange">1</span>
 		</a>
-		<a href="#" id="testSetGroup7MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
-			JSON Data Provider Unit Tests
-			<span class="w3-badge w3-tiny w3-win8-emerald">3</span>
-		</a>
-		<a href="#" id="testSetGroup8MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			<a href="#" id="testSetGroup8MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
 			Report - HTML Report Unit Tests
 			<span class="w3-badge w3-tiny w3-win8-emerald">2</span>
 		</a>
-		<a href="#" id="testSetGroup9MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			<a href="#" id="testSetGroup9MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
 			HTML Report Generator Unit Tests
 			<span class="w3-badge w3-tiny w3-win8-emerald">1</span>
 		</a>
-		<a href="#" id="testSetGroup10MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
+			<a href="#" id="testSetGroup10MenuItem" class="w3-bar-item w3-button sidebarMenuItem">
 			Execution Control Unit Tests
 			<span class="w3-badge w3-tiny w3-win8-emerald">4</span>
 		</a>
@@ -274,23 +311,23 @@
 		</div>
 		<br />
 		<div id="mainContent_dashboard" class="w3-container">
-
+			
 			<div class="w3-border w3-row" style="height:400px;">
 				<canvas id="testResultSummary"></canvas>
 			</div>
-
+			
 			<div class="w3-border w3-third" style="height:400px;">
 				<canvas id="testCountSummary"></canvas>
 			</div>
-
+			
 			<div class="w3-border w3-third" style="height:400px;">
 				<canvas id="savingSummary"></canvas>
 			</div>
-
+			
 			<div class="w3-border w3-third" style="height:400px;">
-				<canvas id="executionTimeSummary"></canvas>
+				<canvas id="executionTimeDistribution"></canvas>
 			</div>
-
+			
 		</div>
 		<div id="mainContent_summary" class="w3-container" style="display:none;">
 			<table class="w3-table w3-tiny">
@@ -308,7 +345,7 @@
 					<th style="text-align:center;">Elapsed Time</th>
 				</thead>
 				<tbody>
-					<tr class="w3-pale-green">
+					<tr class="w3-pale-green">							
 						<td>TestNG Customizations Unit Tests</td>
 						<td>Parallel2 Unit Tests</td>
 						<td style="text-align:center;">5</td>
@@ -316,11 +353,11 @@
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:36</td>
-						<td style="text-align:center;">06/01/2023 16:43:46</td>
+						<td style="text-align:center;">06/01/2023 17:18:16</td>
+						<td style="text-align:center;">06/01/2023 17:18:26</td>
 						<td style="text-align:center;">00:00:10</td style="text-align:center;">
 					</tr>
-					<tr class="w3-pale-green">
+					<tr class="w3-pale-green">							
 						<td>TestNG Customizations Unit Tests</td>
 						<td>Report - Screenshot Unit Tests</td>
 						<td style="text-align:center;">8</td>
@@ -328,11 +365,11 @@
 						<td style="text-align:center;">2</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:38</td>
-						<td style="text-align:center;">06/01/2023 16:43:52</td>
+						<td style="text-align:center;">06/01/2023 17:18:18</td>
+						<td style="text-align:center;">06/01/2023 17:18:32</td>
 						<td style="text-align:center;">00:00:13</td style="text-align:center;">
 					</tr>
-					<tr class="w3-pale-green">
+					<tr class="w3-pale-green">							
 						<td>TestNG Customizations Unit Tests</td>
 						<td>Excel Data Provider Unit Tests</td>
 						<td style="text-align:center;">4</td>
@@ -340,23 +377,23 @@
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
-						<td style="text-align:center;">06/01/2023 16:43:36</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
+						<td style="text-align:center;">06/01/2023 17:18:16</td>
 						<td style="text-align:center;">00:00:00</td style="text-align:center;">
 					</tr>
-					<tr class="w3-pale-green">
+					<tr class="w3-pale-green">							
 						<td>TestNG Customizations Unit Tests</td>
 						<td>Parallel3 Unit Tests</td>
-						<td style="text-align:center;">3</td>
-						<td style="text-align:center;">3</td style="text-align:center;">
+						<td style="text-align:center;">2</td>
+						<td style="text-align:center;">2</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:45</td>
-						<td style="text-align:center;">06/01/2023 16:43:47</td>
+						<td style="text-align:center;">06/01/2023 17:18:25</td>
+						<td style="text-align:center;">06/01/2023 17:18:27</td>
 						<td style="text-align:center;">00:00:02</td style="text-align:center;">
 					</tr>
-					<tr class="w3-pale-green">
+					<tr class="w3-pale-green">							
 						<td>TestNG Customizations Unit Tests</td>
 						<td>Retry Analyzer Unit Tests</td>
 						<td style="text-align:center;">8</td>
@@ -364,11 +401,11 @@
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">4</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
 						<td style="text-align:center;">00:00:00</td style="text-align:center;">
 					</tr>
-					<tr class="w3-pale-green">
+					<tr class="w3-pale-green">							
 						<td>TestNG Customizations Unit Tests</td>
 						<td>Parallel1 Unit Tests</td>
 						<td style="text-align:center;">5</td>
@@ -376,23 +413,11 @@
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
-						<td style="text-align:center;">06/01/2023 16:43:45</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
+						<td style="text-align:center;">06/01/2023 17:18:25</td>
 						<td style="text-align:center;">00:00:10</td style="text-align:center;">
 					</tr>
-					<tr class="w3-pale-green">
-						<td>TestNG Customizations Unit Tests</td>
-						<td>Report - Test Status Unit Tests</td>
-						<td style="text-align:center;">5</td>
-						<td style="text-align:center;">4</td style="text-align:center;">
-						<td style="text-align:center;">1</td style="text-align:center;">
-						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:34</td>
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
-						<td style="text-align:center;">00:00:00</td style="text-align:center;">
-					</tr>
-					<tr class="w3-pale-green">
+					<tr class="w3-pale-green">							
 						<td>TestNG Customizations Unit Tests</td>
 						<td>JSON Data Provider Unit Tests</td>
 						<td style="text-align:center;">3</td>
@@ -400,11 +425,23 @@
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:34</td>
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
+						<td style="text-align:center;">06/01/2023 17:18:14</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
 						<td style="text-align:center;">00:00:00</td style="text-align:center;">
 					</tr>
-					<tr class="w3-pale-green">
+					<tr class="w3-pale-green">							
+						<td>TestNG Customizations Unit Tests</td>
+						<td>Report - Test Status Unit Tests</td>
+						<td style="text-align:center;">5</td>
+						<td style="text-align:center;">4</td style="text-align:center;">
+						<td style="text-align:center;">1</td style="text-align:center;">
+						<td style="text-align:center;">0</td style="text-align:center;">
+						<td style="text-align:center;">0</td style="text-align:center;">
+						<td style="text-align:center;">06/01/2023 17:18:14</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
+						<td style="text-align:center;">00:00:00</td style="text-align:center;">
+					</tr>
+					<tr class="w3-pale-green">							
 						<td>TestNG Customizations Unit Tests</td>
 						<td>Report - HTML Report Unit Tests</td>
 						<td style="text-align:center;">2</td>
@@ -412,11 +449,11 @@
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
 						<td style="text-align:center;">00:00:00</td style="text-align:center;">
 					</tr>
-					<tr class="w3-pale-green">
+					<tr class="w3-pale-green">							
 						<td>TestNG Customizations Unit Tests</td>
 						<td>HTML Report Generator Unit Tests</td>
 						<td style="text-align:center;">1</td>
@@ -424,11 +461,11 @@
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
 						<td style="text-align:center;">00:00:00</td style="text-align:center;">
 					</tr>
-					<tr class="w3-pale-green">
+					<tr class="w3-pale-green">							
 						<td>TestNG Customizations Unit Tests</td>
 						<td>Execution Control Unit Tests</td>
 						<td style="text-align:center;">4</td>
@@ -436,14 +473,14 @@
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
 						<td style="text-align:center;">0</td style="text-align:center;">
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
-						<td style="text-align:center;">06/01/2023 16:43:35</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
+						<td style="text-align:center;">06/01/2023 17:18:15</td>
 						<td style="text-align:center;">00:00:00</td style="text-align:center;">
 					</tr>
 				</tbody>
 			</table>
 		</div>
-
+		
 		<div id="mainContent_testSetGroup0" class="w3-container" style="display:none;">
 			<ul class="w3-ul w3-small">
 				<li class="testCase">
@@ -451,16 +488,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel2 Unit Tests</span><br />
 						<span><b>test11</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:36</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:38</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:16</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:18</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:38</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:18</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -469,16 +505,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel2 Unit Tests</span><br />
 						<span><b>test12</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:38</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:40</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:18</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:20</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:40</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:20</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -487,16 +522,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel2 Unit Tests</span><br />
 						<span><b>test13</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:40</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:42</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:20</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:22</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:42</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:22</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -505,16 +539,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel2 Unit Tests</span><br />
 						<span><b>test14</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:42</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:44</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:22</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:24</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:44</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:24</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -523,16 +556,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel2 Unit Tests</span><br />
 						<span><b>test15</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:44</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:46</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:24</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:26</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:46</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:26</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -542,62 +574,56 @@
 			<ul class="w3-ul w3-small">
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit Tests</span><br />
 						<span><b>Automatic screenshot with driver</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:38</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:38</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:18</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:18</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:38</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:18</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit Tests</span><br />
 						<span><b>Automatic screenshot with driver</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:40</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:40</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:20</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:20</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:40</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:20</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit Tests</span><br />
 						<span><b>Automatic screenshot with driver</b></span><br />
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">Pass <i
-								class="fa fa-warning w3-small"></i></span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:42</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:42</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">Pass <i class="fa fa-warning w3-small"></i></span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:22</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:22</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:42</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:22</span>
 							<i class="fa fa fa-times-circle w3-small" style="color:crimson"></i>
 							<span>
-								Expecting actual:
-								11
-								to be less than:
-								10 </span>
+Expecting actual:
+  11
+to be less than:
+  10 </span>
 							<a class="screenshotButton">
 								<i class="fa fa-camera w3-small" style="cursor: pointer;"></i>
 							</a>
@@ -609,78 +635,71 @@
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit Tests</span><br />
 						<span><b>Automatic screenshot without driver</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:44</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:44</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:24</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:24</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:44</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:24</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit Tests</span><br />
 						<span><b>Automatic screenshot without driver</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:46</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:46</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:26</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:26</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:46</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:26</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit Tests</span><br />
 						<span><b>Automatic screenshot without driver</b></span><br />
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">Pass <i
-								class="fa fa-warning w3-small"></i></span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:48</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:48</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">Pass <i class="fa fa-warning w3-small"></i></span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:28</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:28</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:48</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:28</span>
 							<i class="fa fa fa-times-circle w3-small" style="color:crimson"></i>
 							<span>
-								Expecting actual:
-								11
-								to be less than:
-								10 </span>
+Expecting actual:
+  11
+to be less than:
+  10 </span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit Tests</span><br />
 						<span><b>Test with no driver</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:50</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:50</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:30</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:30</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:50</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:30</span>
 							<i class="fa fa-info-circle w3-small" style="color:darkblue;"></i>
 							<span>Screenshot not attached</span>
 						</li>
@@ -688,17 +707,16 @@
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Screenshot Unit Tests</span><br />
 						<span><b>Test with driver</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:52</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:52</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:32</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:32</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:52</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:32</span>
 							<i class="fa fa-info-circle w3-small" style="color:darkblue;"></i>
 							<span>Screenshot attached</span>
 							<a class="screenshotButton">
@@ -709,12 +727,12 @@
 							</span>
 						</li>
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:52</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:32</span>
 							<i class="fa fa-info-circle w3-small" style="color:darkblue;"></i>
 							<span>Screenshot not attached as flag is false</span>
 						</li>
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:52</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:32</span>
 							<i class="fa fa-info-circle w3-small" style="color:darkblue;"></i>
 							<span>Screenshot not attached as flag is false by default</span>
 						</li>
@@ -726,77 +744,69 @@
 			<ul class="w3-ul w3-small">
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Excel Data Provider Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Excel Data Provider Unit Tests</span><br />
 						<span><b>getTestDataFromExcel_xls_test</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Excel Data Provider Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Excel Data Provider Unit Tests</span><br />
 						<span><b>getTestDataFromExcel_xls_test</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Excel Data Provider Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Excel Data Provider Unit Tests</span><br />
 						<span><b>getTestDataFromExcel_xls_test</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Excel Data Provider Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Excel Data Provider Unit Tests</span><br />
 						<span><b>getTestDataFromExcel_xlsx_test</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:36</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:36</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:16</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:16</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:36</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:16</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -809,52 +819,32 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel3 Unit Tests</span><br />
 						<span><b>test13</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:45</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:47</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:25</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:27</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:47</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:27</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel3 Unit Tests</span><br />
-						<span><b>test12</b></span><br />
+						<span><b>test14</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:45</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:47</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:25</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:27</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:47</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:27</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
-						</li>
-					</ul>
-				</li>
-				<li class="testCase">
-					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel3 Unit Tests</span><br />
-						<span><b>test11</b></span><br />
-						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:45</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:47</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
-					</div>
-					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
-						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:47</span>
-							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -867,16 +857,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Retry Analyzer Unit Tests</span><br />
 						<span><b>withRetry</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -885,16 +874,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Retry Analyzer Unit Tests</span><br />
 						<span><b>declaredZeroRetry</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -903,17 +891,17 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Retry Analyzer Unit Tests</span><br />
 						<span><b>passAfterThreeRetry</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-amber">Skip</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-times-circle w3-small" style="color:crimson"></i>
 							<span>
-								expected: 6
-								but was: 3</span>
+expected: 6
+ but was: 3</span>
 						</li>
 					</ul>
 				</li>
@@ -922,17 +910,17 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Retry Analyzer Unit Tests</span><br />
 						<span><b>passAfterThreeRetry</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-amber">Skip</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-times-circle w3-small" style="color:crimson"></i>
 							<span>
-								expected: 6
-								but was: 4</span>
+expected: 6
+ but was: 4</span>
 						</li>
 					</ul>
 				</li>
@@ -941,17 +929,17 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Retry Analyzer Unit Tests</span><br />
 						<span><b>passAfterThreeRetry</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-amber">Skip</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-times-circle w3-small" style="color:crimson"></i>
 							<span>
-								expected: 6
-								but was: 5</span>
+expected: 6
+ but was: 5</span>
 						</li>
 					</ul>
 				</li>
@@ -960,16 +948,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Retry Analyzer Unit Tests</span><br />
 						<span><b>passAfterThreeRetry</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -978,17 +965,17 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Retry Analyzer Unit Tests</span><br />
 						<span><b>passAfterOneRetry</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-amber">Skip</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-times-circle w3-small" style="color:crimson"></i>
 							<span>
-								expected: 8
-								but was: 7</span>
+expected: 8
+ but was: 7</span>
 						</li>
 					</ul>
 				</li>
@@ -997,16 +984,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Retry Analyzer Unit Tests</span><br />
 						<span><b>passAfterOneRetry</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -1019,16 +1005,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel1 Unit Tests</span><br />
 						<span><b>test11</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:37</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:17</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:37</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:17</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -1037,16 +1022,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel1 Unit Tests</span><br />
 						<span><b>test12</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:37</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:39</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:17</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:19</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:39</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:19</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -1055,16 +1039,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel1 Unit Tests</span><br />
 						<span><b>test13</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:39</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:41</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:19</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:21</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:41</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:21</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -1073,16 +1056,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel1 Unit Tests</span><br />
 						<span><b>test14</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:41</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:43</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:21</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:23</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:43</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:23</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -1091,16 +1073,15 @@
 						<span class="w3-tiny">TestNG Customizations Unit Tests - Parallel1 Unit Tests</span><br />
 						<span><b>test15</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:43</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:45</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:23</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:25</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:02</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:45</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:25</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -1110,100 +1091,52 @@
 			<ul class="w3-ul w3-small">
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Test Status Unit
-							Tests</span><br />
-						<span><b>passWithinSuccessPercentage_test</b></span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - JSON Data Provider Unit Tests</span><br />
+						<span><b>getTestDataFromJson_test</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:34</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:14</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Test Status Unit
-							Tests</span><br />
-						<span><b>passWithinSuccessPercentage_test</b></span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - JSON Data Provider Unit Tests</span><br />
+						<span><b>getTestDataFromJson_test</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:14</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Test Status Unit
-							Tests</span><br />
-						<span><b>passWithinSuccessPercentage_test</b></span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - JSON Data Provider Unit Tests</span><br />
+						<span><b>getTestDataFromJson_test</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:14</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
-						</li>
-					</ul>
-				</li>
-				<li class="testCase">
-					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Test Status Unit
-							Tests</span><br />
-						<span><b>passWithinSuccessPercentage_test</b></span><br />
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">Pass <i
-								class="fa fa-warning w3-small"></i></span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
-					</div>
-					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
-						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
-							<i class="fa fa fa-times-circle w3-small" style="color:crimson"></i>
-							<span>
-								Expecting actual:
-								11
-								to be less than:
-								10 </span>
-						</li>
-					</ul>
-				</li>
-				<li class="testCase">
-					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Test Status Unit
-							Tests</span><br />
-						<span><b>pass_test</b></span><br />
-						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
-					</div>
-					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
-						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
-							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -1213,58 +1146,90 @@
 			<ul class="w3-ul w3-small">
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - JSON Data Provider Unit
-							Tests</span><br />
-						<span><b>getTestDataFromJson_test</b></span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Test Status Unit Tests</span><br />
+						<span><b>passWithinSuccessPercentage_test</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:34</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:14</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - JSON Data Provider Unit
-							Tests</span><br />
-						<span><b>getTestDataFromJson_test</b></span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Test Status Unit Tests</span><br />
+						<span><b>passWithinSuccessPercentage_test</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:34</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - JSON Data Provider Unit
-							Tests</span><br />
-						<span><b>getTestDataFromJson_test</b></span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Test Status Unit Tests</span><br />
+						<span><b>passWithinSuccessPercentage_test</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:34</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
+						</li>
+					</ul>
+				</li>
+				<li class="testCase">
+					<div class="testDetailWrapper w3-button w3-block w3-left-align">
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Test Status Unit Tests</span><br />
+						<span><b>passWithinSuccessPercentage_test</b></span><br />
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">Pass <i class="fa fa-warning w3-small"></i></span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
+						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
+					</div>
+					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
+						<li>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
+							<i class="fa fa fa-times-circle w3-small" style="color:crimson"></i>
+							<span>
+Expecting actual:
+  11
+to be less than:
+  10 </span>
+						</li>
+					</ul>
+				</li>
+				<li class="testCase">
+					<div class="testDetailWrapper w3-button w3-block w3-left-align">
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - Test Status Unit Tests</span><br />
+						<span><b>pass_test</b></span><br />
+						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
+						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
+					</div>
+					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
+						<li>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
+							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -1274,46 +1239,43 @@
 			<ul class="w3-ul w3-small">
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - HTML Report Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - HTML Report Unit Tests</span><br />
 						<span><b>Recorded Test with no steps</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - HTML Report Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Report - HTML Report Unit Tests</span><br />
 						<span><b>Recorded Test with steps</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa-info-circle w3-small" style="color:darkblue;"></i>
 							<span>Step w/o flag</span>
 						</li>
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa-info-circle w3-small" style="color:darkblue;"></i>
 							<span>Step with false flag</span>
 						</li>
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa-info-circle w3-small" style="color:darkblue;"></i>
 							<span>Step with true flag</span>
 						</li>
@@ -1325,20 +1287,18 @@
 			<ul class="w3-ul w3-small">
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - HTML Report Generator Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - HTML Report Generator Unit Tests</span><br />
 						<span><b>invalidTemplate</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -1348,77 +1308,69 @@
 			<ul class="w3-ul w3-small">
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Execution Control Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Execution Control Unit Tests</span><br />
 						<span><b>healthCheckTest</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Execution Control Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Execution Control Unit Tests</span><br />
 						<span><b>notAnnotedTest</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Execution Control Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Execution Control Unit Tests</span><br />
 						<span><b>regressionTest</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
 				<li class="testCase">
 					<div class="testDetailWrapper w3-button w3-block w3-left-align">
-						<span class="w3-tiny">TestNG Customizations Unit Tests - Execution Control Unit
-							Tests</span><br />
+						<span class="w3-tiny">TestNG Customizations Unit Tests - Execution Control Unit Tests</span><br />
 						<span><b>smokeTest</b></span><br />
 						<span class="w3-tag w3-round w3-tiny w3-win8-emerald">Pass</span>
-						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 16:43:35</span> :
-						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 16:43:35</span>
+						<span class="w3-tag w3-round w3-tiny w3-win8-lime">06/01/2023 17:18:15</span> : 
+						<span class="w3-tag w3-round w3-tiny w3-win8-orange">06/01/2023 17:18:15</span> 
 						<span class="w3-tag w3-round w3-tiny w3-win8-steel">00:00:00</span>
 					</div>
 					<ul class="testSteps w3-ul w3-tiny w3-light-gray" style="display: none;">
 						<li>
-							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:13:35</span>
+							<span class="w3-tag w3-round w3-win8-mauve">06/01/2023 11:48:15</span>
 							<i class="fa fa fa-warning w3-small" style="color:darkorange"></i>
-							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record
-								the same</span>
+							<span>Test steps were not recorded. Please use TestFactory.recordTestStep function to record the same</span>
 						</li>
 					</ul>
 				</li>
@@ -1426,5 +1378,4 @@
 		</div>
 	</div>
 </body>
-
 </html>

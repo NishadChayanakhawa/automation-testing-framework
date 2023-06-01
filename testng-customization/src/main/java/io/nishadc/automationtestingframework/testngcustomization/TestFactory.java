@@ -204,6 +204,14 @@ public class TestFactory {
 		testExecutionResult.setSavedTime(String.format("%d", savedDurationMillis));
 		testExecutionResult.setSavedTimeText(DateTimeHelper.formatDuration(Duration.ofMillis(savedDurationMillis)));
 		testExecutionResult.setSavingPercent(String.format("%.1f", savingPercent));
+		
+		//populate testset execution time
+		testExecutionResult.getTestSets().stream()
+			.forEach(testSet -> 
+				testSet.setElapsedTimeForChart(String.format("%d", 
+						Duration.between
+							(testSet.getStartTimestamp(), testSet.getEndTimestamp()).toMillis())));
+		
 		return testExecutionResult;
 	}
 }

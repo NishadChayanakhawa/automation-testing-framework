@@ -23,6 +23,7 @@ public class TestSet extends JsonPropertyBaseClass{
 	private int conditionallyPassedTests;
 	private int failedTests;
 	private int skippedTests;
+	private String elapsedTimeForChart;
 	private List<TestCase> tests;
 	public TestSet() {
 		super();
@@ -101,5 +102,11 @@ public class TestSet extends JsonPropertyBaseClass{
 	}
 	public void addTest(TestCase test) {
 		this.tests.add(test);
+	}
+	public String getElapsedTimeForChart() {
+		return elapsedTimeForChart;
+	}
+	public void setElapsedTimeForChart(String elapsedTimeForChart) {
+		this.elapsedTimeForChart = elapsedTimeForChart;
 	}
 }

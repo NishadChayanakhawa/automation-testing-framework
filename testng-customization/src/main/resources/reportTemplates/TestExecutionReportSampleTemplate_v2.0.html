@@ -193,6 +193,45 @@
 
 			const savingSummaryChart = document.getElementById("savingSummary");
 			new Chart(savingSummaryChart, savingSummaryConfig);
+			
+			//Generate Execution Time Distribution
+			const executionTimeDistributionData = {
+				labels: [<#list testSets as testSet>"${testSet.name}",</#list>],
+				datasets: [
+					{
+						label : 'Execution Time',
+						data: [<#list testSets as testSet>"${testSet.elapsedTimeForChart}",</#list>],
+						fill : true,
+					}
+				]
+			};
+
+			const executionTimeDistributionDisplay=[<#list testSets as testSet>"${testSet.elapsedTime}",</#list>];
+
+			const executionTimeDistributionConfig = {
+				type: 'radar',
+				data: executionTimeDistributionData,
+				options: {
+					responsive: true,
+					maintainAspectRatio : false,
+					plugins : {
+						title : {
+							display : true,
+							text : 'Execution Time Distribution(ms)'
+						},
+						tooltip: {
+							callbacks: {
+								label: function (context) {
+									return executionTimeDistributionDisplay[context.dataIndex];
+								}
+							}
+						}
+					},
+				},
+			};
+
+			const executionTimeDistributionChart = document.getElementById("executionTimeDistribution");
+			new Chart(executionTimeDistributionChart, executionTimeDistributionConfig);
 		});
 	</script>
 </head>
@@ -256,7 +295,7 @@
 			</div>
 			
 			<div class="w3-border w3-third" style="height:400px;">
-				<canvas id="executionTimeSummary"></canvas>
+				<canvas id="executionTimeDistribution"></canvas>
 			</div>
 			
 		</div>
