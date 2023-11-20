@@ -44,6 +44,7 @@ public class RESTAPIComponents {
 	protected static void releaseComponents() {
 		RESTAPIComponents.headerMaps.remove();
 		RESTAPIComponents.parameterMaps.remove();
+		RESTAPIComponents.requestBodyTemplates.remove();
 		RESTAPIComponents.responses.remove();
 	}
 }
