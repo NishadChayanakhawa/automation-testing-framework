@@ -32,12 +32,17 @@ public class ApplicationActions {
 		ApplicationActions.logger.debug("Setting up driver with timeout {}",timeout);
 		this.driver=driver;
 		this.driverWait=new WebDriverWait(driver,Duration.ofSeconds(timeout));
-	}	
+	}
+	
+	protected void waitForElementToBeInteractable(WebElement element) {
+		this.driverWait.until(ExpectedConditions.elementToBeClickable(element));
+	}
 	
 	/*
 	 * Click interactions
 	 */
 	protected void clickElement(WebElement element) {
+		this.waitForElementToBeInteractable(element);
 		ApplicationActions.logger.debug("Clicking on webelement {}",element);
 		element.click();
 	}
@@ -63,6 +68,7 @@ public class ApplicationActions {
 	 */
 	
 	protected String getInnerText(WebElement element) {
+		this.waitForElementToBeInteractable(element);
 		ApplicationActions.logger.debug("Extracting inner text for webelement {}",element);
 		String innerText=element.getText();
 		ApplicationActions.logger.debug("Extracted inner text {}",innerText);
@@ -131,6 +137,7 @@ public class ApplicationActions {
 	 */
 	
 	protected void sendText(WebElement element, String text) {
+		this.waitForElementToBeInteractable(element);
 		ApplicationActions.logger.debug("Sending text {} to webelement {}",text,element);
 		element.sendKeys(text);
 	}
@@ -173,6 +180,7 @@ public class ApplicationActions {
 	 */
 	
 	protected void clearValue(WebElement element) {
+		this.waitForElementToBeInteractable(element);
 		ApplicationActions.logger.debug("Clearing text value from webelement {}",element);
 		element.clear();
 	}
