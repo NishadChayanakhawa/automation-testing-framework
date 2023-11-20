@@ -1,4 +1,4 @@
-Feature: REST API Tests
+Feature: REST API Tests	
   Scenario: Simple Get Test
     Given In request header, set "Parameter1" to "Value1"
     And In request header, set "Parameter2" to "Value2"
@@ -34,3 +34,8 @@ Feature: REST API Tests
 	 	Then Response status code should be 200
 	 	And Validate that value at Json Path "data.name" in response is "Ms. Jane Doe Jr."
 	 	And Validate that value at Json Path "data.job" in response is "Tester"
+	 	
+	 Scenario: Simple Get Test with Path variable
+	  Given Set variable "pathVar" to value "headers"
+	  When GET request is submitted to "https://postman-echo.com/{pathVar}"
+	  Then Response status code should be 200

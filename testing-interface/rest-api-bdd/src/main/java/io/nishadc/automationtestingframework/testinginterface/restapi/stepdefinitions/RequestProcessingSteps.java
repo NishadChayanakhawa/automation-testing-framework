@@ -1,5 +1,8 @@
 package io.nishadc.automationtestingframework.testinginterface.restapi.stepdefinitions;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import org.json.JSONObject;
 
 import io.cucumber.java.ParameterType;
@@ -15,18 +18,30 @@ public class RequestProcessingSteps {
 	public RequestMethod method(String requestMethodString) {
 		return RequestMethod.valueOf(requestMethodString);
 	}
-	
+
 	@When("{method} request is submitted to {string}")
 	public void request_is_submitted_to(RequestMethod requestMethod, String url) {
-		TestFactory.recordTestStep(
-				String.format("<b>%s</b> request is submitted to <b>%s</b>", requestMethod, url));
-		JSONObject requestBody=RESTAPIComponents.requestBodyTemplates.get()==null?
-				null:new JSONObject(RESTAPIComponents.requestBodyTemplates.get());
-	    RequestSpecification request=RESTAPITestHelper.formRequest
-	    		(RESTAPIComponents.headerMaps.get(),
-	    				RESTAPIComponents.parameterMaps.get(),
-	    				requestBody);
-	    ValidatableResponse response=RESTAPITestHelper.getRespones(request, url, requestMethod);
-	    RESTAPIComponents.responses.set(response);
+		String fullUrl=formUrl(url);
+		TestFactory.recordTestStep(String.format("<b>%s</b> request is submitted to <b>%s</b>", requestMethod, fullUrl));
+		JSONObject requestBody = RESTAPIComponents.requestBodyTemplates.get() == null ? null
+				: new JSONObject(RESTAPIComponents.requestBodyTemplates.get());
+		RequestSpecification request = RESTAPITestHelper.formRequest(RESTAPIComponents.headerMaps.get(),
+				RESTAPIComponents.parameterMaps.get(), requestBody);
+		ValidatableResponse response = RESTAPITestHelper.getRespones(request, fullUrl, requestMethod);
+		RESTAPIComponents.responses.set(response);
+	}
+
+	private String formUrl(String url) {
+		String patternToMatch = "\\{[^}]+\\}";
+
+		Pattern pattern = Pattern.compile(patternToMatch);
+		Matcher matcher = pattern.matcher(url);
+		StringBuffer result = new StringBuffer();
+		while (matcher.find()) {
+			matcher.appendReplacement(result,
+					RESTAPIComponents.getVariableValue(matcher.group().replaceAll("[\\{\\}]", "")));
+		}
+		matcher.appendTail(result);
+		return result.toString();
 	}
 }
