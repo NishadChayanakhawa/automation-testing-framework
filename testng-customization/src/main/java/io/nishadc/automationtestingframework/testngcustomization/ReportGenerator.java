@@ -20,6 +20,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 public class ReportGenerator implements ITestListener,IReporter {
+	private static Long testCounter=1L;
+	
+	private static synchronized Long getTestId() {
+		return ReportGenerator.testCounter++;
+	}
+	
 	@Override
 	public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
 		IReporter.super.generateReport(xmlSuites, suites, outputDirectory);
@@ -38,7 +44,7 @@ public class ReportGenerator implements ITestListener,IReporter {
 			throw (ReportGenerationException)new ReportGenerationException(e.getMessage()).initCause(e);
 		}
 		
-		HTMLReportGenerator.generateHTMLReport("TestExecutionReportSampleTemplate_v2.0", testExecutionReport.toMap(),"TestExecutionReport");
+		HTMLReportGenerator.generateHTMLReport("TestExecutionReportSampleTemplate_v3.0", testExecutionReport.toMap(),"TestExecutionReport");
 		HTMLReportGenerator.generateHTMLReport("MailableSummaryTemplate_v1.0", testExecutionReport.toMap(),"MailableSummary");
 	}
 	
@@ -73,7 +79,7 @@ public class ReportGenerator implements ITestListener,IReporter {
 		String testNGTestName=ReportGenerator.getTestNGTestName(result);
 		String testNGMethodName=ReportGenerator.getTestNGMethodName(result);
 		
-		TestFactory.addTest(testNGSuiteName, testNGTestName, testNGMethodName);
+		TestFactory.addTest(ReportGenerator.getTestId(),testNGSuiteName, testNGTestName, testNGMethodName);
 		
 		ReportGenerator.logger.debug("Test Started: {}:{}:{}",testNGSuiteName, testNGTestName, testNGMethodName);
 	}

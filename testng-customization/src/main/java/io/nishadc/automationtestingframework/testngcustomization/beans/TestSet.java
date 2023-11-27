@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 @JsonInclude(Include.NON_NULL)
 public class TestSet extends JsonPropertyBaseClass{
 	@JsonProperty
+	private Long id;
 	private String suiteName;
 	private String name;
 	@JsonFormat(shape=JsonFormat.Shape.STRING,pattern="MM/dd/yyyy HH:mm:ss")
@@ -29,8 +30,9 @@ public class TestSet extends JsonPropertyBaseClass{
 		super();
 		this.tests=new ArrayList<>();
 	}
-	public TestSet(String suiteName, String name) {
+	public TestSet(Long id,String suiteName, String name) {
 		this();
+		this.id=id;
 		this.suiteName = suiteName;
 		this.name = name;
 	}

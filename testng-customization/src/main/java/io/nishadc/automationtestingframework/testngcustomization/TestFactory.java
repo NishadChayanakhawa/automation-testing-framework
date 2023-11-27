@@ -27,8 +27,8 @@ public class TestFactory {
 		
 	}
 	
-	protected static void addTest(String testNGSuiteName, String testNGTestName, String name) {
-		TestCase test = new TestCase(testNGSuiteName, testNGTestName, name);
+	protected static void addTest(Long id,String testNGSuiteName, String testNGTestName, String name) {
+		TestCase test = new TestCase(id,testNGSuiteName, testNGTestName, name);
 		TestFactory.logger.debug("Adding Test: {}", test);
 		TestFactory.tests.set(test);
 	}
@@ -109,13 +109,14 @@ public class TestFactory {
 	}
 
 	protected static TestExecutionResult getExecutionResult() {
+		Long testSetId=1L;
 		Map<String, TestSet> testSets = new HashMap<>();
 		for (TestCase test : TestFactory.completedTests) {
 			String key = String.format("%s:%s", test.getTestNGSuiteName(), test.getTestNGTestName());
 			if (testSets.keySet().contains(key)) {
 				testSets.get(key).addTest(test);
 			} else {
-				TestSet testSet = new TestSet(test.getTestNGSuiteName(), test.getTestNGTestName());
+				TestSet testSet = new TestSet(testSetId++,test.getTestNGSuiteName(), test.getTestNGTestName());
 				testSet.addTest(test);
 				testSets.put(key, testSet);
 			}
