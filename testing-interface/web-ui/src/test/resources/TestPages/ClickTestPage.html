@@ -25,35 +25,51 @@
 </head>
 
 <body>
-	<div class="container p-3">
+	<form class="container p-3" id="submissionForm">
 		<div class="mb-3">
 			<label for="value" class="form-label">Value</label>
-			<input type="text" class="form-control" id="value" value="1">
+			<input type="text" class="form-control" id="value" name="value" value="1">
 		</div>
-		<select class="form-select" aria-label="Default select example" id="singleSelect">
+		<select class="form-select" aria-label="Default select example" id="singleSelect" name="singleSelect">
 			<option selected>Open this select menu</option>
 			<option value="1">One</option>
 			<option value="2">Two</option>
 			<option value="3">Three</option>
 		</select>
 		<br>
-		<select class="form-select" aria-label="Default select example" multiple="true" id="multiSelect">
+		<select class="form-select" aria-label="Default select example" multiple="true" id="multiSelect"
+			name="multiSelect">
 			<option value="1">One</option>
 			<option value="2">Two</option>
 			<option value="3">Three</option>
 		</select>
+		<div class="btn-group" role="group" aria-label="role-selection" req>
+			<input type="checkbox" class="btn-check" name="roles" id="roleADMIN" value="ADMIN" autocomplete="off">
+			<label class="btn btn-outline-primary" for="roleADMIN">Admin</label>
+
+			<input type="checkbox" class="btn-check" name="roles" id="roleTEST_MANAGER" value="TEST_MANAGER"
+				autocomplete="off">
+			<label class="btn btn-outline-primary" for="roleTEST_MANAGER">Test Manager</label>
+
+			<input type="checkbox" class="btn-check" name="roles" id="roleTEST_LEAD" value="TEST_LEAD"
+				autocomplete="off">
+			<label class="btn btn-outline-primary" for="roleTEST_LEAD">Test Lead</label>
+
+			<input type="checkbox" class="btn-check" name="roles" id="roleTESTER" value="TESTER" autocomplete="off">
+			<label class="btn btn-outline-primary" for="roleTESTER">Tester</label>
+		</div>
 		<br>
 		<div id="innerTextTest" class="classTest">
 			This is inner text
 		</div>
-		
+
 		<div id="hiddenTest" style="display: none;">
 			This is hidden
 		</div>
 		<input type="text" class="form-control" id="disabled" value="1" disabled>
 		<br>
-		<button class="btn btn-primary mb-3" id="button">Click Here</button>
-	</div>
+		<button class="btn btn-primary mb-3" type="submit" id="button">Click Here</button>
+	</form>
 </body>
 
 </html>
