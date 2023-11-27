@@ -29,7 +29,6 @@ Feature: REST API Tests
 	 	Given In request header, set "content-type" to value of variable "ContentType"
 	 	And Request body template is loaded from file "simpleRequestTemplate.json"
 	 	And In request body template, replace "${name}" with value of variable "Name"
-	 	And In request body template, replace "${job}" with value of variable "Job"
 	 	When POST request is submitted to "https://postman-echo.com/post/"
 	 	Then Response status code should be 200
 	 	And Validate that value at Json Path "data.name" in response is "Ms. Jane Doe Jr."
@@ -37,5 +36,5 @@ Feature: REST API Tests
 	 	
 	 Scenario: Simple Get Test with Path variable
 	  Given Set variable "pathVar" to value "headers"
-	  When GET request is submitted to "https://postman-echo.com/{pathVar}"
+	  When GET request is submitted to "https://postman-echo.com/{{pathVar}}"
 	  Then Response status code should be 200
