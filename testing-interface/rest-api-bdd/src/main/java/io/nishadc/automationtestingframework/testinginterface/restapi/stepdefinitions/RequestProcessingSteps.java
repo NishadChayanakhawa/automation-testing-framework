@@ -38,12 +38,11 @@ public class RequestProcessingSteps {
 		Matcher matcher = pattern.matcher(url);
 		StringBuffer result = new StringBuffer();
 		while (matcher.find()) {
-			String key = matcher.group(1); // Extract the key within {{}}
+			String key = matcher.group(1);
             String replacement = RESTAPIComponents.variableMap.getOrDefault(key, matcher.group()); // Use the map value or keep the original if not found
             matcher.appendReplacement(result, replacement);
 		}
 		matcher.appendTail(result);
-		System.out.println("replacement: " + result.toString() );
 		return result.toString();
 	}
 }
