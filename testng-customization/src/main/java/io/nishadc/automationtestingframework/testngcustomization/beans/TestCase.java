@@ -16,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @JsonInclude(Include.NON_NULL)
 public class TestCase extends JsonPropertyBaseClass{
 	@JsonProperty
+	private Long id;
 	private String testNGSuiteName;
 	private String testNGTestName;
 	private String name;
@@ -34,8 +35,9 @@ public class TestCase extends JsonPropertyBaseClass{
 		this.startTimestamp=LocalDateTime.now();
 		this.testSteps=new ArrayList<>();
 	}
-	public TestCase(String testNGSuiteName, String testNGTestName, String name) {
+	public TestCase(Long id,String testNGSuiteName, String testNGTestName, String name) {
 		this();
+		this.id=id;
 		this.testNGSuiteName = testNGSuiteName;
 		this.testNGTestName = testNGTestName;
 		this.name = name;

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,11 +9,16 @@
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
 		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
 		crossorigin="anonymous"></script>
-	<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.6.4.min.js"
+		integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.3.0/dist/chart.umd.min.js"></script>
 	<script src="https://kit.fontawesome.com/5c27d4d602.js" crossorigin="anonymous"></script>
 	<script>
-		$(document).ready(function () { 
+		$(document).ready(function () {
+			$("*[id*='Content']:not('#DashboardContent')").hide();
+			$("a[class^='nav-link'],a[class='dropdown-item']").click(function() {
+				console.log($(this).attr('id').split("_")[1]);
+			});
 			//Generate Summary Graph
 			const executionSummaryData = {
 				labels: ["Parallel2 Unit Tests","Report - Screenshot Unit Tests","Excel Data Provider Unit Tests","Parallel3 Unit Tests","Retry Analyzer Unit Tests","Parallel1 Unit Tests","JSON Data Provider Unit Tests","Report - Test Status Unit Tests","Report - HTML Report Unit Tests","HTML Report Generator Unit Tests","Execution Control Unit Tests",],
@@ -29,14 +35,14 @@
 					{
 						type : 'bar',
 						label: 'Total Tests',
-						data: [5,8,4,4,8,5,3,5,2,1,4,],
+						data: [5,8,4,5,8,5,3,5,2,1,4,],
 						backgroundColor: 'lightblue',
 						yAxisID : 'y',
 					},
 					{
 						type : 'bar',
 						label: 'Passed Tests',
-						data: [5,6,4,4,4,5,3,4,2,1,4,],
+						data: [5,6,4,5,4,5,3,4,2,1,4,],
 						backgroundColor: 'lightgreen',
 						yAxisID : 'y',
 					}
@@ -105,7 +111,7 @@
 				labels: ["Passed Tests","Conditionally Passed Tests","Skipped Tests","Failed Tests"],
 				datasets: [
 					{
-						data: [42,3,4,0],
+						data: [43,3,4,0],
 						backgroundColor : ['green','lightgreen','orange','red'],
 						hoverOffset : 4,
 					}
@@ -135,14 +141,14 @@
 				labels: ["Time Saved","Actual Execution Time"],
 				datasets: [
 					{
-						data: [31706,15964],
+						data: [36091,14893],
 						backgroundColor : ['lightgray','green'],
 						hoverOffset : 4,
 					}
 				]
 			};
 
-			const savingDataDisplay=["00:00:31","00:00:15"];
+			const savingDataDisplay=["00:00:36","00:00:14"];
 
 			const savingSummaryConfig = {
 				type: 'pie',
@@ -153,7 +159,7 @@
 					plugins : {
 						title : {
 							display : true,
-							text : 'Parallel Execution Time Saving - 66.5%'
+							text : 'Parallel Execution Time Saving - 70.8%'
 						},
 						tooltip: {
 							callbacks: {
@@ -175,13 +181,13 @@
 				datasets: [
 					{
 						label : 'Execution Time',
-						data: ["10057","12005","980","2011","110","10073","536","615","27","319","46",],
+						data: ["10063","11220","1046","2013","79","10088","543","611","18","390","29",],
 						fill : true,
 					}
 				]
 			};
 
-			const executionTimeDistributionDisplay=["00:00:10","00:00:12","00:00:00","00:00:02","00:00:00","00:00:10","00:00:00","00:00:00","00:00:00","00:00:00","00:00:00",];
+			const executionTimeDistributionDisplay=["00:00:10","00:00:11","00:00:01","00:00:02","00:00:00","00:00:10","00:00:00","00:00:00","00:00:00","00:00:00","00:00:00",];
 
 			const executionTimeDistributionConfig = {
 				type: 'radar',
@@ -213,62 +219,141 @@
 
 <body>
 	<!-- As a heading -->
-	<nav class="navbar bg-body-tertiary">
-
+	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-
-			<span class="navbar-brand mb-0 h1">Test Execution Report - <span id="subTitle">Dashoard</span></span>
-			<button class="btn btn-outline-dark nav-navbar" type="button" data-bs-toggle="offcanvas"
-				data-bs-target="#offcanvasSidebar" aria-controls="offcanvasSidebar">
-				<i class="fa-solid fa-bars fa-lg"></i>
+			<a class="navbar-brand" href="#">Test Execution Report</a>
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+				aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
 			</button>
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page" href="#" id="linkFor_Dashboard">Dashboard</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#" id="linkFor_Summary">Summary</a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="dropdown-toggle nav-link" href="#" role="button" data-bs-toggle="dropdown"
+							aria-expanded="false">
+							Test Sets <span class="badge rounded-pill text-bg-primary">11</span>
+						</a>
+						<ul class="dropdown-menu">
+							<li>
+								<a class="dropdown-item" href="#" id="linkFor_Parallel2 Unit Tests">Parallel2 Unit Tests<span class="m-1 badge rounded-pill text-bg-success">5</span></a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Report - Screenshot Unit Tests<span class="m-1 badge rounded-pill text-bg-success">6</span><span class="m-1 badge rounded-pill bg-success bg-opacity-50 text-dark">2</span></a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Excel Data Provider Unit Tests<span class="m-1 badge rounded-pill text-bg-success">4</span></a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Parallel3 Unit Tests<span class="m-1 badge rounded-pill text-bg-success">5</span></a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Retry Analyzer Unit Tests<span class="m-1 badge rounded-pill text-bg-success">4</span><span class="m-1 badge rounded-pill text-bg-warning">4</span></a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Parallel1 Unit Tests<span class="m-1 badge rounded-pill text-bg-success">5</span></a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">JSON Data Provider Unit Tests<span class="m-1 badge rounded-pill text-bg-success">3</span></a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Report - Test Status Unit Tests<span class="m-1 badge rounded-pill text-bg-success">4</span><span class="m-1 badge rounded-pill bg-success bg-opacity-50 text-dark">1</span></a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Report - HTML Report Unit Tests<span class="m-1 badge rounded-pill text-bg-success">2</span></a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">HTML Report Generator Unit Tests<span class="m-1 badge rounded-pill text-bg-success">1</span></a>
+							</li>
+							<li>
+								<a class="dropdown-item" href="#">Execution Control Unit Tests<span class="m-1 badge rounded-pill text-bg-success">4</span></a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 		</div>
 	</nav>
 
-	<div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasSidebar" aria-labelledby="offcanvasSidebarLabel">
-		<div class="offcanvas-header">
-			<h5 class="offcanvas-title" id="offcanvasSidebarLabel">Menu</h5>
-			<button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-		</div>
-		<div class="offcanvas-body">
-			<ul class="nav nav-pills flex-column mb-auto">
-				<li class="nav-item">
-					<a href="#" id="Dashboard" class="nav-link active" aria-current="page">
-						<i class="fa-solid fa-chart-line fa-xl"></i> Dashboard
-					</a>
-				</li>
-				<li>
-					<a href="#" id="Summary" class="nav-link link-body-emphasis">
-						<i class="fa-regular fa-rectangle-list fa-xl"></i> Summary
-					</a>
-				</li>
-				<li>
-					<a href="#" class="nav-link link-body-emphasis">
-						Test Set I
-					</a>
-				</li>
-			</ul>
-		</div>
-	</div>
-
 	<div id="DashboardContent" style="width:100%;">
 		<div class="row">
-			<div class="col-12" style="height:45vh;">
+			<div class="col-12 border border-secondary-subtle border-bottom-0" style="height:45vh;">
 				<canvas id="testResultSummary"></canvas>
 			</div>
 		</div>
 
 		<div class="row" style="height:45vh;">
-			<div class="col-4">
+			<div class="col-4 border border-secondary-subtle">
 				<canvas id="testCountSummary"></canvas>
 			</div>
-			<div class="col-4">
+			<div class="col-4 border border-secondary-subtle border-start-0 border-end-0">
 				<canvas id="savingSummary"></canvas>
 			</div>
-			<div class="col-4">
+			<div class="col-4 border border-secondary-subtle">
 				<canvas id="executionTimeDistribution"></canvas>
 			</div>
 		</div>
+	</div>
+
+	<div id="SummaryContent" style="width:100%;">
+		<table class="table table-sm">
+			<caption>Test Result Summary</caption>
+			<thead>
+				<th>Test Suite Name</th>
+				<th>Test Name</th>
+				<th>Total Tests</th>
+				<th>Passed Tests</th>
+				<th>Conditionally Passed Tests</th>
+				<th>Failed Tests</th>
+				<th>Skipped Tests</th>
+				<th>Start Timestamp</th>
+				<th>End Timestamp</th>
+				<th>Elapsed Time</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>TestNG Customizations Unit Tests</td>
+					<td>Parallel2 Unit Tests</td>
+					<td>5</td>
+					<td>5</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>06/01/2023 17:18:16</td>
+					<td>06/01/2023 17:18:26</td>
+					<td>00:00:10</td>
+				</tr>
+				<tr>
+					<td>TestNG Customizations Unit Tests</td>
+					<td>Report - Screenshot Unit Tests</td>
+					<td>8</td>
+					<td>6</td>
+					<td>2</td>
+					<td>0</td>
+					<td>0</td>
+					<td>06/01/2023 17:18:18</td>
+					<td>06/01/2023 17:18:32</td>
+					<td>00:00:13</td>
+				</tr>
+				<tr>
+					<td>TestNG Customizations Unit Tests</td>
+					<td>Excel Data Provider Unit Tests</td>
+					<td>4</td>
+					<td>4</td>
+					<td>0</td>
+					<td>0</td>
+					<td>0</td>
+					<td>06/01/2023 17:18:15</td>
+					<td>06/01/2023 17:18:16</td>
+					<td>00:00:00</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </body>
 
