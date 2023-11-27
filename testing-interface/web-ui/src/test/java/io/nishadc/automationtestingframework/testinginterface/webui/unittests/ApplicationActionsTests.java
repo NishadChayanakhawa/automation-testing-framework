@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.Test;
 import io.nishadc.automationtestingframework.testinginterface.webui.unittests.pageObjects.ClickTestPage;
 import io.nishadc.automationtestingframework.testngcustomization.TestFactory;
+import java.util.Map;
+import java.util.List;
 
 public class ApplicationActionsTests  extends BaseWebTest {
 	@Test
@@ -149,5 +151,18 @@ public class ApplicationActionsTests  extends BaseWebTest {
 		
 		Assertions.assertThat(clickTestPage.isEnabledByXPath()).isTrue();
 		Assertions.assertThat(clickTestPage.isEnabledByElement()).isFalse();
+	}
+	
+	@Test
+	public void formFillTest() {
+		WebDriver driver=BaseWebTest.drivers.get();
+		TestFactory.recordTest("Fill form", driver);
+		String url=BaseWebTest.getTestPageUrl("ClickTestPage");
+		driver.get(url);
+		
+		ClickTestPage clickTestPage=new ClickTestPage(driver);
+		Map<String,Object> values=Map.of("value","99","singleSelect","3","multiSelect",List.of("1","3"),"roles",List.of("ADMIN","TEST_LEAD"));
+		clickTestPage.fillForm(values);
+		TestFactory.recordTestStep("Form filled", true);
 	}
 }

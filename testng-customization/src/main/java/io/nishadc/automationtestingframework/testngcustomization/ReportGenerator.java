@@ -44,7 +44,7 @@ public class ReportGenerator implements ITestListener,IReporter {
 			throw (ReportGenerationException)new ReportGenerationException(e.getMessage()).initCause(e);
 		}
 		
-		HTMLReportGenerator.generateHTMLReport("TestExecutionReportSampleTemplate_v3.0", testExecutionReport.toMap(),"TestExecutionReport");
+		HTMLReportGenerator.generateHTMLReport("TestExecutionReportSampleTemplate_v2.0", testExecutionReport.toMap(),"TestExecutionReport");
 		HTMLReportGenerator.generateHTMLReport("MailableSummaryTemplate_v1.0", testExecutionReport.toMap(),"MailableSummary");
 	}
 	

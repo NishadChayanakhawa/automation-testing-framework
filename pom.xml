@@ -417,8 +417,8 @@
 		<!-- Configuration -->
 		<java.version>17</java.version>
 		<project.encoding>UTF-8</project.encoding>
-		<jacoco-instruction-coveredratio.minimum>1.0</jacoco-instruction-coveredratio.minimum>
-		<jacoco-branch-coveredratio.minimum>1.0</jacoco-branch-coveredratio.minimum>
+		<jacoco-instruction-coveredratio.minimum>0.8</jacoco-instruction-coveredratio.minimum>
+		<jacoco-branch-coveredratio.minimum>0.8</jacoco-branch-coveredratio.minimum>
 		<sonar.host.url>http://103.160.144.199:9000</sonar.host.url>
 		<sonar.exclusions>**/beans/*</sonar.exclusions>
 

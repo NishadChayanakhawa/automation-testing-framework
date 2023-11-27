@@ -1,5 +1,7 @@
 package io.nishadc.automationtestingframework.testinginterface.webui.unittests.pageObjects;
 
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -15,6 +17,10 @@ public class ClickTestPage extends ApplicationActions {
 	private static final String HIDDEN_XPATH="//div[@id='hiddenTest']";
 	private static final String SINGLE_DROPDOWN_XPATH="//select[@id='singleSelect']";
 	private static final String MULTI_DROPDOWN_XPATH="//select[@id='multiSelect']";
+	private static final String FORM_XPATH="//form[@id='submissionForm']";
+	
+	@FindBy(xpath=FORM_XPATH)
+	WebElement formElement;
 	
 	@FindBy(xpath=VALUE_XPATH)
 	WebElement valueElement;
@@ -214,5 +220,9 @@ public class ClickTestPage extends ApplicationActions {
 	
 	public boolean isEnabledByElement() {
 		return super.isEnabled(disabled);
+	}
+	
+	public void fillForm(Map<String,Object> values) {
+		this.fillForm(this.formElement,values);
 	}
 }
