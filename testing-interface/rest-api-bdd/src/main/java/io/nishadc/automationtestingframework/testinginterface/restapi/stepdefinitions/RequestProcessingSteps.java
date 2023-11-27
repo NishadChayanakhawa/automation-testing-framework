@@ -24,7 +24,7 @@ public class RequestProcessingSteps {
 		String fullUrl=formUrl(url);
 		TestFactory.recordTestStep(String.format("<b>%s</b> request is submitted to <b>%s</b>", requestMethod, fullUrl));
 		JSONObject requestBody = RESTAPIComponents.requestBodyTemplates.get() == null ? null
-				: new JSONObject(RESTAPIComponents.requestBodyTemplates.get());
+				: new JSONObject(formUrl(RESTAPIComponents.requestBodyTemplates.get()));
 		RequestSpecification request = RESTAPITestHelper.formRequest(RESTAPIComponents.headerMaps.get(),
 				RESTAPIComponents.parameterMaps.get(), requestBody);
 		ValidatableResponse response = RESTAPITestHelper.getRespones(request, fullUrl, requestMethod);
@@ -32,16 +32,18 @@ public class RequestProcessingSteps {
 	}
 
 	private String formUrl(String url) {
-		String patternToMatch = "\\{[^}]+\\}";
+		String patternToMatch = "\\{\\{(.*?)}}";
 
 		Pattern pattern = Pattern.compile(patternToMatch);
 		Matcher matcher = pattern.matcher(url);
 		StringBuffer result = new StringBuffer();
 		while (matcher.find()) {
-			matcher.appendReplacement(result,
-					RESTAPIComponents.getVariableValue(matcher.group().replaceAll("[\\{\\}]", "")));
+			String key = matcher.group(1); // Extract the key within {{}}
+            String replacement = RESTAPIComponents.variableMap.getOrDefault(key, matcher.group()); // Use the map value or keep the original if not found
+            matcher.appendReplacement(result, replacement);
 		}
 		matcher.appendTail(result);
+		System.out.println("replacement: " + result.toString() );
 		return result.toString();
 	}
 }
